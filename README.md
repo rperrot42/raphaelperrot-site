@@ -57,15 +57,15 @@ repli et de dépannage.
 
 ### Voie 1 — automatique, à chaque push (`.github/workflows/deploy.yml`)
 
-À chaque push sur `main`, GitHub compile le site et publie le contenu de `dist`
-sur la branche **`deploy`**. L'hébergement OVH suit cette branche.
+L'offre gratuite OVH (100 Mo) ne propose pas le déploiement depuis Git. La GitHub Action
+compile donc le site à chaque push sur `main`, puis envoie `dist/` dans `/www` par SFTP
+(`ftp.cluster129.hosting.ovh.net`, utilisateur `raphaqm`), comme le fait `deploy/deploy.sh`.
 
-Rien à installer côté machine : `git push` suffit.
+**Une fois pour toutes :** dans GitHub → Settings → Secrets and variables → Actions,
+créer le secret **`OVH_FTP_PASSWORD`** avec le mot de passe FTP (onglet « FTP - SSH » d'OVH,
+où il peut aussi être réinitialisé).
 
-> **À vérifier avant de compter dessus :** cette voie suppose que ton offre OVH
-> propose bien le déploiement depuis un dépôt Git. Toutes les offres mutualisées
-> ne l'ont pas. Si l'option est absente de ton espace client, la voie 2 ci-dessous
-> fonctionne partout.
+Ensuite, `git push` suffit. Le suivi se fait dans l'onglet **Actions** du dépôt.
 
 ### Voie 2 — manuelle, par FTP (`deploy/deploy.sh`)
 
