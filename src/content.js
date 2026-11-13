@@ -148,8 +148,8 @@ export const legal = {
   registered: '21 février 2024',
   vat: "TVA non applicable, article 293 B du Code général des impôts.",
   host: {
-    name: 'Vercel Inc.',
-    address: '440 N Barranca Ave #4133, Covina, CA 91723, États-Unis',
-    url: 'https://vercel.com',
+    name: 'OVH SAS',
+    address: '2 rue Kellermann, 59100 Roubaix, France — 1007',
+    url: 'https://www.ovhcloud.com',
   },
 };
