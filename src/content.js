@@ -174,6 +174,23 @@ export const about = {
   ],
 };
 
+export const contactSection = {
+  eyebrow: 'Contact',
+  title: 'Parlons de votre projet',
+  intro:
+    "Dites-moi en quelques lignes ce qui vous ferait gagner du temps. Je vous réponds sous 24 h ouvrées, et le premier échange ne vous engage à rien.",
+  rassurances: [
+    ['Réponse sous 24 h', 'Du lundi au vendredi. Vous ne restez pas sans nouvelles.'],
+    ['Premier échange gratuit', "Au téléphone ou en visio, sans engagement ni devis à signer."],
+    ['Un devis clair avant de commencer', "Détaillé ligne par ligne. Vous savez exactement ce que vous payez."],
+  ],
+  etapes: [
+    'Vous m’écrivez ou vous m’appelez.',
+    'On prend 30 minutes pour comprendre votre besoin.',
+    'Je vous envoie un devis détaillé, sans engagement.',
+  ],
+};
+
 export const legal = {
   activity: 'Développement de sites internet et de logiciels',
   registered: '21 février 2024',
