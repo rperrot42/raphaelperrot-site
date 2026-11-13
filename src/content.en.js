@@ -135,14 +135,24 @@ const sport = {
   text:
     "I work a lot, and sport is what taught me to keep it up over time: you do not improve by going all out every other day, you improve by showing up without skipping sessions. I train year round with a coach, towards goals set months in advance. I approach my clients' projects the same way: a clear deadline, steady milestones, and nothing left to the last minute.",
   youtubeId: '',
-  photo: {
-    base: '/photos/velo-alpha',
-    largeurs: [500, 800, 1200],
-    width: 1200,
-    height: 900,
-    alt: 'An Alpha Aero SL road bike: midnight blue carbon frame and deep section wheels, resting on the grass by a road.',
-    legende: 'My road bike, an Alpha Aero SL.',
-  },
+  photos: [
+    {
+      base: '/photos/vtt-course',
+      largeurs: [500, 800, 1100],
+      width: 1100,
+      height: 1084,
+      alt: 'Raphaël Perrot racing cross-country mountain biking in team kit, on a woodland singletrack.',
+      legende: 'Racing cross-country.',
+    },
+    {
+      base: '/photos/velo-alpha',
+      largeurs: [500, 800, 1200],
+      width: 1200,
+      height: 900,
+      alt: 'An Alpha Aero SL road bike: midnight blue carbon frame and deep section wheels, resting on the grass by a road.',
+      legende: 'My road bike, an Alpha Aero SL.',
+    },
+  ],
   cards: [
     {
       title: 'Mountain biking',
@@ -212,4 +222,95 @@ const legal = {
   },
 };
 
-export default { site, nav, hero, services, projects, method, experience, sport, about, portrait, contactSection, legal };
+const servicesPage = {
+  eyebrow: 'Services',
+  title: 'What I can build for you',
+  intro:
+    'Every trade has its own constraints. Here is concretely what I can build, and when each one is the right answer.',
+  blocs: [
+    {
+      titre: 'Shopify online store',
+      pour: 'You sell products and want to offer them online.',
+      texte:
+        'I build your store on Shopify: product pages, secure payment, shipping, discount codes, customer accounts. You then manage your products and prices yourself, through a simple interface, without depending on me day to day.',
+      exemples: [
+        'Catalogue and product pages',
+        'Card, transfer or instalment payment',
+        'Order and stock tracking',
+        'Custom product configurator',
+        'Connection to your till or accounting software',
+      ],
+    },
+    {
+      titre: 'Brochure site',
+      pour: 'Your customers search for you on Google and find nothing.',
+      texte:
+        'A site presenting your business, your work and how to reach you, built to be found in local searches. Fast to load, readable on a phone, and editable by you once delivered.',
+      exemples: [
+        'Presentation of your services',
+        'Portfolio gallery',
+        'Contact form and appointment booking',
+        'Local SEO and business listing',
+        'Legal notice and GDPR compliance',
+      ],
+    },
+    {
+      titre: 'Custom business software',
+      pour: 'You run your business on a spreadsheet that has hit its limits.',
+      texte:
+        'I build a web application shaped around the way you work: stock management, scheduling, job tracking, customer records. Reachable from any browser, nothing to install, with your data hosted in France.',
+      exemples: [
+        'Stock and inventory management',
+        'Scheduling and team assignment',
+        'Order or job tracking',
+        'Customer records and history',
+        'Dashboards and exports',
+      ],
+    },
+    {
+      titre: 'Automating repetitive work',
+      pour: 'You spend your evenings retyping the same information.',
+      texte:
+        'We work out what costs you time every week, and I have the machine do it. Often the best money spent: a few days of development against several hours recovered every month.',
+      exemples: [
+        'Quotes and invoices generated automatically',
+        'Payment reminders',
+        'Appointment reminders by SMS or email',
+        'Synchronisation between your tools',
+        'Reports sent every week',
+      ],
+    },
+    {
+      titre: 'Taking over and maintenance',
+      pour: 'You already have a site, but it is slow, broken, or nobody looks after it any more.',
+      texte:
+        'Where possible I work with what exists rather than rebuilding everything: bug fixes, security updates, speed improvements, accessibility and GDPR compliance.',
+      exemples: [
+        'Audit and quote for taking over',
+        'Bug fixes and updates',
+        'Loading speed optimisation',
+        'Backups and hardening',
+        'Training so you can take control again',
+      ],
+    },
+  ],
+  stack: {
+    titre: 'The technologies I work with',
+    texte:
+      'For reference, if you already work with a technical provider. Otherwise, do not worry about it: choosing the technology is my job, not yours.',
+    groupes: [
+      ['Back end', ['Java', 'Spring Boot', 'Node.js', 'PHP', 'Python']],
+      ['Front end', ['React', 'JavaScript', 'HTML / CSS']],
+      ['Data', ['PostgreSQL', 'JPA / Hibernate', 'SQL']],
+      ['E-commerce', ['Shopify', 'Stripe']],
+      ['Infrastructure', ['Docker', 'Kubernetes', 'Jenkins', 'Git', 'OVH', 'Linux']],
+    ],
+  },
+  cta: {
+    titre: 'Your need does not fit any of these boxes?',
+    texte: 'That is often the case, and usually a good sign. Describe it to me and I will tell you honestly whether I am the right person.',
+    bouton: 'Describe your need',
+  },
+};
+
+export default { servicesPage, site, nav, hero, services, projects, method, experience, sport, about, portrait, contactSection, legal };

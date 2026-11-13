@@ -9,7 +9,8 @@ import About from './components/About.jsx';
 import Contact from './components/Contact.jsx';
 import Footer from './components/Footer.jsx';
 import Legal from './pages/Legal.jsx';
-import { LangContext, langFromPath, isLegalPath } from './i18n.jsx';
+import ServicesPage from './pages/ServicesPage.jsx';
+import { LangContext, langFromPath, isLegalPath, isServicesPath } from './i18n.jsx';
 
 // `route` est fourni au pré-rendu ; dans le navigateur on lit l'URL courante.
 export default function App({ route }) {
@@ -17,13 +18,17 @@ export default function App({ route }) {
     route ?? (typeof window === 'undefined' ? '/' : window.location.pathname);
   const lang = langFromPath(path);
   const legal = isLegalPath(path);
+  const services = isServicesPath(path);
+  const pageSeule = legal || services;
 
   return (
     <LangContext.Provider value={lang}>
-      <Header home={!legal} />
+      <Header home={!pageSeule} />
       <main id="main">
         {legal ? (
           <Legal />
+        ) : services ? (
+          <ServicesPage />
         ) : (
           <>
             <Hero />

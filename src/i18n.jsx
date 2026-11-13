@@ -5,8 +5,8 @@ import en from './content.en.js';
 export const dictionnaires = { fr, en };
 
 export const langues = [
-  { code: 'fr', label: 'FR', nom: 'Français', racine: '/', legal: '/mentions-legales' },
-  { code: 'en', label: 'EN', nom: 'English', racine: '/en', legal: '/en/legal-notice' },
+  { code: 'fr', label: 'FR', nom: 'Français', racine: '/', legal: '/mentions-legales', services: '/services' },
+  { code: 'en', label: 'EN', nom: 'English', racine: '/en', legal: '/en/legal-notice', services: '/en/services' },
 ];
 
 export const LangContext = createContext('fr');
@@ -25,8 +25,16 @@ export function langFromPath(path) {
   return p === '/en' || p.startsWith('/en/') ? 'en' : 'fr';
 }
 
+function normalise(path) {
+  return (path || '/').replace(/\/+$/, '') || '/';
+}
+
 /** Vrai si l'URL correspond à la page des mentions légales, dans l'une ou l'autre langue. */
 export function isLegalPath(path) {
-  const p = (path || '/').replace(/\/+$/, '') || '/';
-  return langues.some((l) => l.legal === p);
+  return langues.some((l) => l.legal === normalise(path));
+}
+
+/** Vrai si l'URL correspond à la page des services, dans l'une ou l'autre langue. */
+export function isServicesPath(path) {
+  return langues.some((l) => l.services === normalise(path));
 }

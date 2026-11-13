@@ -36,7 +36,11 @@ export default function Header({ home = true }) {
           {nav
             .filter((item) => item.id !== 'contact')
             .map((item) => (
-              <a key={item.id} href={`${prefix}#${item.id}`} onClick={() => setOpen(false)}>
+              <a
+                key={item.id}
+                href={item.id === 'services' ? courante.services : `${prefix}#${item.id}`}
+                onClick={() => setOpen(false)}
+              >
                 {item.label}
               </a>
             ))}

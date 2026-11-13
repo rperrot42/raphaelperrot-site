@@ -28,8 +28,22 @@ const pages = [
     alt: `${SITE}/en/legal-notice`,
   },
   {
+    route: '/services', lang: 'fr', fichier: 'dist/services/index.html',
+    url: `${SITE}/services`,
+    titre: 'Services — sites, logiciels sur mesure et automatisations · Raphaël Perrot',
+    description: "Boutique Shopify, site vitrine, logiciel métier sur mesure, automatisation des tâches répétitives et reprise de site existant. Développeur freelance à Toulouse.",
+    alt: `${SITE}/en/services`,
+  },
+  {
     route: '/en', lang: 'en', fichier: 'dist/en/index.html', url: `${SITE}/en`,
     titre: en.site.title, description: en.site.description, alt: `${SITE}/`,
+  },
+  {
+    route: '/en/services', lang: 'en', fichier: 'dist/en/services/index.html',
+    url: `${SITE}/en/services`,
+    titre: 'Services — websites, custom software and automation · Raphaël Perrot',
+    description: 'Shopify stores, brochure sites, custom business software, automation of repetitive work and taking over existing sites. Freelance developer near Toulouse, France.',
+    alt: `${SITE}/services`,
   },
   {
     route: '/en/legal-notice', lang: 'en', fichier: 'dist/en/legal-notice/index.html',

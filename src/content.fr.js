@@ -143,14 +143,24 @@ const sport = {
     "Je travaille beaucoup, et c'est le sport qui m'a appris à le faire dans la durée : on ne progresse pas en forçant un jour sur deux, mais en répétant sans sauter de séance. Je m'entraîne toute l'année, accompagné par un coach, avec des objectifs fixés plusieurs mois à l'avance. J'aborde les projets de mes clients de la même façon : une échéance claire, des étapes régulières, et rien qui se joue à la dernière minute.",
   // Pour ajouter une vidéo VTT : colle ici l'identifiant YouTube (la partie après « v= »).
   youtubeId: '',
-  photo: {
-    base: '/photos/velo-alpha',
-    largeurs: [500, 800, 1200],
-    width: 1200,
-    height: 900,
-    alt: "Vélo de route Alpha Aero SL : cadre carbone bleu nuit, roues à profil haut, posé dans l'herbe au bord d'une route.",
-    legende: 'Mon vélo de route, un Alpha Aero SL.',
-  },
+  photos: [
+    {
+      base: '/photos/vtt-course',
+      largeurs: [500, 800, 1100],
+      width: 1100,
+      height: 1084,
+      alt: "Raphaël Perrot en course de VTT cross-country, en tenue d'équipe, sur un single en sous-bois.",
+      legende: 'En course de cross-country.',
+    },
+    {
+      base: '/photos/velo-alpha',
+      largeurs: [500, 800, 1200],
+      width: 1200,
+      height: 900,
+      alt: "Vélo de route Alpha Aero SL : cadre carbone bleu nuit, roues à profil haut, posé dans l'herbe au bord d'une route.",
+      legende: 'Mon vélo de route, un Alpha Aero SL.',
+    },
+  ],
   cards: [
     {
       title: 'VTT',
@@ -221,4 +231,95 @@ const legal = {
   },
 };
 
-export default { site, nav, hero, services, projects, method, experience, sport, about, portrait, contactSection, legal };
+const servicesPage = {
+  eyebrow: 'Services',
+  title: 'Ce que je peux construire pour vous',
+  intro:
+    "Chaque métier a ses contraintes. Voici concrètement ce que je sais faire, et dans quel cas c'est la bonne réponse.",
+  blocs: [
+    {
+      titre: 'Boutique en ligne Shopify',
+      pour: 'Vous vendez des produits et vous voulez les proposer en ligne.',
+      texte:
+        "Je monte votre boutique sur Shopify : fiches produits, paiement sécurisé, livraison, codes promo, espace client. Vous gérez ensuite vos produits et vos prix vous-même, depuis une interface simple, sans dépendre de moi pour le quotidien.",
+      exemples: [
+        'Catalogue et fiches produits',
+        'Paiement par carte, virement ou en plusieurs fois',
+        'Suivi des commandes et des stocks',
+        'Configurateur de produit sur mesure',
+        'Connexion à votre logiciel de caisse ou de comptabilité',
+      ],
+    },
+    {
+      titre: 'Site vitrine',
+      pour: "Vos clients vous cherchent sur Google et ne vous trouvent pas.",
+      texte:
+        "Un site qui présente votre activité, vos réalisations et vos coordonnées, pensé pour être trouvé sur les recherches locales. Rapide à charger, lisible sur téléphone, et modifiable par vous une fois livré.",
+      exemples: [
+        'Présentation de vos prestations',
+        'Galerie de réalisations',
+        'Formulaire de contact et prise de rendez-vous',
+        'Référencement local (Google, fiche établissement)',
+        'Mentions légales et conformité RGPD',
+      ],
+    },
+    {
+      titre: 'Logiciel métier sur mesure',
+      pour: "Vous faites tourner votre activité sur un tableur qui a atteint ses limites.",
+      texte:
+        "Je développe une application web adaptée à votre façon de travailler : gestion de stock, planning, suivi de chantier, base clients. Accessible depuis n'importe quel navigateur, sans installation, avec vos données hébergées en France.",
+      exemples: [
+        'Gestion de stock et inventaire',
+        'Planning et affectation des équipes',
+        'Suivi de commandes ou de chantiers',
+        'Base clients et historique',
+        'Tableaux de bord et exports',
+      ],
+    },
+    {
+      titre: 'Automatisation des tâches répétitives',
+      pour: 'Vous passez vos soirées à recopier les mêmes informations.',
+      texte:
+        "On identifie ce qui vous prend du temps chaque semaine, et je le fais faire par la machine. Souvent la meilleure dépense : quelques jours de développement contre plusieurs heures récupérées chaque mois.",
+      exemples: [
+        'Devis et factures générés automatiquement',
+        'Relances de paiement',
+        'Rappels de rendez-vous par SMS ou e-mail',
+        'Synchronisation entre vos outils',
+        'Rapports envoyés chaque semaine',
+      ],
+    },
+    {
+      titre: 'Reprise et maintenance',
+      pour: "Vous avez déjà un site, mais il est lent, cassé, ou plus personne ne s'en occupe.",
+      texte:
+        "Je reprends l'existant plutôt que de tout refaire quand c'est possible : correction de bugs, mise à jour de sécurité, amélioration de la vitesse, remise aux normes d'accessibilité et de RGPD.",
+      exemples: [
+        'Diagnostic et devis de reprise',
+        'Correction de bugs et mises à jour',
+        'Optimisation de la vitesse de chargement',
+        'Sauvegardes et sécurisation',
+        'Formation pour que vous repreniez la main',
+      ],
+    },
+  ],
+  stack: {
+    titre: 'Les technologies que je maîtrise',
+    texte:
+      "Pour information, si vous travaillez déjà avec un prestataire technique. Sinon, ne vous en occupez pas : le choix de la technologie est mon travail, pas le vôtre.",
+    groupes: [
+      ['Back-end', ['Java', 'Spring Boot', 'Node.js', 'PHP', 'Python']],
+      ['Front-end', ['React', 'JavaScript', 'HTML / CSS']],
+      ['Données', ['PostgreSQL', 'JPA / Hibernate', 'SQL']],
+      ['E-commerce', ['Shopify', 'Stripe']],
+      ['Infrastructure', ['Docker', 'Kubernetes', 'Jenkins', 'Git', 'OVH', 'Linux']],
+    ],
+  },
+  cta: {
+    titre: 'Votre besoin ne rentre dans aucune case ?',
+    texte: "C'est souvent le cas, et c'est plutôt bon signe. Décrivez-le moi, je vous dirai franchement si je suis la bonne personne.",
+    bouton: 'Me décrire votre besoin',
+  },
+};
+
+export default { servicesPage, site, nav, hero, services, projects, method, experience, sport, about, portrait, contactSection, legal };
