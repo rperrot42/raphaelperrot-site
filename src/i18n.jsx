@@ -5,8 +5,8 @@ import en from './content.en.js';
 export const dictionnaires = { fr, en };
 
 export const langues = [
-  { code: 'fr', label: 'FR', nom: 'Français', racine: '/', legal: '/mentions-legales', services: '/services' },
-  { code: 'en', label: 'EN', nom: 'English', racine: '/en', legal: '/en/legal-notice', services: '/en/services' },
+  { code: 'fr', label: 'FR', nom: 'Français', racine: '/', legal: '/mentions-legales', services: '/services', contact: '/contact' },
+  { code: 'en', label: 'EN', nom: 'English', racine: '/en', legal: '/en/legal-notice', services: '/en/services', contact: '/en/contact' },
 ];
 
 export const LangContext = createContext('fr');
@@ -37,4 +37,9 @@ export function isLegalPath(path) {
 /** Vrai si l'URL correspond à la page des services, dans l'une ou l'autre langue. */
 export function isServicesPath(path) {
   return langues.some((l) => l.services === normalise(path));
+}
+
+/** Vrai si l'URL correspond à la page de contact, dans l'une ou l'autre langue. */
+export function isContactPath(path) {
+  return langues.some((l) => l.contact === normalise(path));
 }

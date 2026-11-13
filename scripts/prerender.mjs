@@ -35,6 +35,13 @@ const pages = [
     alt: `${SITE}/en/services`,
   },
   {
+    route: '/contact', lang: 'fr', fichier: 'dist/contact/index.html',
+    url: `${SITE}/contact`,
+    titre: 'Contact — Raphaël Perrot, développeur freelance à Toulouse',
+    description: "Décrivez votre projet en quelques lignes. Réponse sous 24 h ouvrées, premier échange gratuit et sans engagement. Développeur freelance à Toulouse.",
+    alt: `${SITE}/en/contact`,
+  },
+  {
     route: '/en', lang: 'en', fichier: 'dist/en/index.html', url: `${SITE}/en`,
     titre: en.site.title, description: en.site.description, alt: `${SITE}/`,
   },
@@ -44,6 +51,13 @@ const pages = [
     titre: 'Services — websites, custom software and automation · Raphaël Perrot',
     description: 'Shopify stores, brochure sites, custom business software, automation of repetitive work and taking over existing sites. Freelance developer near Toulouse, France.',
     alt: `${SITE}/services`,
+  },
+  {
+    route: '/en/contact', lang: 'en', fichier: 'dist/en/contact/index.html',
+    url: `${SITE}/en/contact`,
+    titre: 'Contact — Raphaël Perrot, freelance developer',
+    description: 'Describe your project in a few lines. Reply within one working day, first conversation free and with no obligation.',
+    alt: `${SITE}/contact`,
   },
   {
     route: '/en/legal-notice', lang: 'en', fichier: 'dist/en/legal-notice/index.html',

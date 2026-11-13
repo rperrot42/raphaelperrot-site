@@ -274,51 +274,55 @@ section { padding: 84px 0; border-top: 1px solid var(--line); }
 .form-done .small { font-size: 15px; }
 .form-done a { color: var(--green); font-weight: 600; }
 
-/* Fenêtre « Écrivez-moi » */
-.modale {
-  border: 0; padding: 0; background: transparent;
-  max-width: 560px; width: calc(100% - 32px); max-height: 92vh;
-  margin: auto; color: var(--ink); overflow: visible;
-}
-.modale::backdrop { background: rgba(8, 26, 20, 0.62); backdrop-filter: blur(3px); }
-.modale-contenu {
-  position: relative; background: #fff; border-radius: 18px; padding: 34px 32px 30px;
-  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.32);
-  max-height: 92vh; overflow-y: auto;
-}
-.modale-titre { font-size: 25px; margin-bottom: 6px; }
-.modale-sous-titre { color: var(--muted); font-size: 16px; margin: 0 0 22px; }
-.modale-fermer {
-  position: absolute; top: 14px; right: 14px; width: 40px; height: 40px;
-  display: flex; align-items: center; justify-content: center;
-  background: none; border: 0; border-radius: 9px; color: var(--muted); cursor: pointer;
-}
-.modale-fermer:hover { background: var(--bg); color: var(--ink); }
-.modale-alt { color: #76857d; font-size: 14px; margin: 16px 0 0; }
-.modale-alt a { color: var(--green); font-weight: 600; }
-
-/* Les champs de la fenêtre reprennent le style de la carte claire */
-.modale-contenu .field label { color: var(--muted); font-size: 15px; font-weight: 500; margin-bottom: 6px; }
-.modale-contenu .optional { color: #8c9b93; font-weight: 400; }
-.modale-contenu input, .modale-contenu textarea {
-  font-family: inherit; font-size: 16px; color: var(--ink);
-  background: #f8faf8; border: 1.5px solid var(--line);
-  border-radius: 10px; padding: 12px 14px; min-height: 48px; resize: vertical;
-}
-.modale-contenu input:focus, .modale-contenu textarea:focus { border-color: var(--green); background: #fff; outline: none; }
-.modale-contenu textarea::placeholder { color: #9aa8a1; }
-.modale-contenu .btn-primary { background: var(--ink); color: var(--bg); border-color: var(--ink); }
-.modale-contenu .btn-primary:hover { background: #0b241d; }
-.modale-contenu :focus-visible { outline: 3px solid var(--green); outline-offset: 2px; }
-
-/* Le bloc « Écrivez-moi » devient cliquable comme un bouton */
-.contact-direct { cursor: pointer; }
-
 /* Pied de page */
 .footer { background: var(--ink); color: #8fa89b; font-size: 14px; padding-bottom: 32px; }
 .footer-inner { border-top: 1px solid #24503f; padding-top: 20px; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
 .footer a { color: #b9cdc2; }
 .footer-links { display: flex; gap: 18px; flex-wrap: wrap; }
+
+/* Page Contact */
+.contact-page { border-top: 0; }
+.contact-page .back { display: inline-block; text-decoration: none; font-weight: 600; font-size: 15px; margin-bottom: 28px; }
+.contact-page .back:hover { text-decoration: underline; }
+.contact-page h1 { font-size: clamp(32px, 5vw, 50px); letter-spacing: -1.4px; margin-bottom: 10px; }
+.contact-page-grid { display: grid; grid-template-columns: 1.25fr 1fr; gap: 48px; align-items: start; margin-top: 44px; }
+.contact-page-form {
+  background: var(--card); border: 1px solid var(--line); border-radius: 18px;
+  padding: 34px; box-shadow: var(--ombre);
+}
+.contact-page-form .field label { color: var(--muted); font-size: 15px; font-weight: 500; margin-bottom: 7px; }
+.contact-page-form .optional { color: #8c9b93; font-weight: 400; }
+.contact-page-form input, .contact-page-form textarea {
+  font-family: inherit; font-size: 16.5px; color: var(--ink);
+  background: #f8faf8; border: 1.5px solid var(--line); border-radius: 11px;
+  padding: 14px 16px; min-height: 52px; resize: vertical;
+  transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
+}
+.contact-page-form input:focus, .contact-page-form textarea:focus {
+  border-color: var(--green); background: #fff; outline: none;
+  box-shadow: 0 0 0 4px rgba(31, 110, 73, 0.1);
+}
+.contact-page-form textarea::placeholder { color: #9aa8a1; }
+.contact-page-form .field { margin-bottom: 20px; }
+.contact-page-form .btn-primary { background: var(--ink); color: var(--bg); border-color: var(--ink); min-height: 54px; font-size: 17px; }
+.contact-page-form .btn-primary:hover { background: #0b241d; }
+.contact-page-form :focus-visible { outline-color: var(--green); }
+
+.contact-page-aside > .label {
+  font-size: 12.5px; font-weight: 600; letter-spacing: 1.4px; text-transform: uppercase;
+  color: var(--green); margin-bottom: 14px;
+}
+.contact-direct.clair { color: var(--ink); border-color: var(--line); background: var(--card); }
+.contact-direct.clair:hover { border-color: var(--green); background: #f0f6f2; }
+.contact-direct.clair .label { color: var(--green); }
+.contact-direct.clair strong { color: var(--ink); }
+.reassure.clair strong { color: var(--ink); }
+.reassure.clair span { color: var(--muted); }
+.steps-next.clair { border-top-color: var(--line); }
+.steps-next.clair ol { color: var(--muted); }
+
+.contact-cta { margin-top: 20px; }
+.contact-promesses { padding-top: 4px; }
 
 /* Page Services */
 .franchise {
@@ -373,6 +377,8 @@ section { padding: 84px 0; border-top: 1px solid var(--line); }
 
 @media (max-width: 920px) {
   .contact-grid { grid-template-columns: 1fr; gap: 36px; }
+  .contact-page-grid { grid-template-columns: 1fr; gap: 32px; }
+  .contact-page-form { padding: 24px; }
   .sport-photos { grid-template-columns: 1fr; gap: 18px; }
   .about-grid { grid-template-columns: 1fr; gap: 28px; }
   .about-photo { max-width: 320px; }
@@ -385,6 +391,8 @@ section { padding: 84px 0; border-top: 1px solid var(--line); }
   .steps { grid-template-columns: 1fr; }
   .form-row { grid-template-columns: 1fr; gap: 0; }
   .contact-grid { grid-template-columns: 1fr; gap: 36px; }
+  .contact-page-grid { grid-template-columns: 1fr; gap: 32px; }
+  .contact-page-form { padding: 24px; }
   .sport-photos { grid-template-columns: 1fr; gap: 18px; }
   .about-grid { grid-template-columns: 1fr; gap: 28px; }
   .about-photo { max-width: 320px; }

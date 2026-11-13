@@ -44,7 +44,7 @@ export default function Header({ home = true }) {
                 {item.label}
               </a>
             ))}
-          <a className="nav-cta" href={`${prefix}#contact`} onClick={() => setOpen(false)}>
+          <a className="nav-cta" href={courante.contact} onClick={() => setOpen(false)}>
             {lang === 'fr' ? 'Me contacter' : 'Get in touch'}
           </a>
           <a className="nav-lang" href={autre.racine} hrefLang={autre.code} lang={autre.code}>

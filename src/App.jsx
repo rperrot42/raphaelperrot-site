@@ -11,7 +11,8 @@ import Contact from './components/Contact.jsx';
 import Footer from './components/Footer.jsx';
 import Legal from './pages/Legal.jsx';
 import ServicesPage from './pages/ServicesPage.jsx';
-import { LangContext, langFromPath, isLegalPath, isServicesPath } from './i18n.jsx';
+import ContactPage from './pages/ContactPage.jsx';
+import { LangContext, langFromPath, isLegalPath, isServicesPath, isContactPath } from './i18n.jsx';
 import { initReveal } from './reveal.js';
 
 // `route` est fourni au pré-rendu ; dans le navigateur on lit l'URL courante.
@@ -21,7 +22,8 @@ export default function App({ route }) {
   const lang = langFromPath(path);
   const legal = isLegalPath(path);
   const services = isServicesPath(path);
-  const pageSeule = legal || services;
+  const contactSeul = isContactPath(path);
+  const pageSeule = legal || services || contactSeul;
 
   // Après le rendu : avant, il n'y a aucun élément à observer.
   useEffect(() => {
@@ -36,6 +38,8 @@ export default function App({ route }) {
           <Legal />
         ) : services ? (
           <ServicesPage />
+        ) : contactSeul ? (
+          <ContactPage />
         ) : (
           <>
             <Hero />

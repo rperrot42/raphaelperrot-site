@@ -34,6 +34,22 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://raphaelperrot.com/contact</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://raphaelperrot.com/contact"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://raphaelperrot.com/en/contact"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://raphaelperrot.com/contact"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://raphaelperrot.com/en/contact</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://raphaelperrot.com/contact"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://raphaelperrot.com/en/contact"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://raphaelperrot.com/contact"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://raphaelperrot.com/mentions-legales</loc>
     <changefreq>yearly</changefreq>
     <priority>0.2</priority>

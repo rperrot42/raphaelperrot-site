@@ -385,4 +385,15 @@ const servicesPage = {
   },
 };
 
-export default { servicesPage, site, nav, hero, services, projects, method, experience, sport, about, portrait, contactSection, legal };
+const contactPage = {
+  eyebrow: 'Contact',
+  title: "Let's talk about your project",
+  intro:
+    'Describe in a few lines what would save you time. I reply within one working day, and a first conversation commits you to nothing.',
+  ouDirect: 'Or directly',
+  appel: 'By phone',
+  mail: 'By email',
+  formTitre: 'Your enquiry',
+};
+
+export default { contactPage, servicesPage, site, nav, hero, services, projects, method, experience, sport, about, portrait, contactSection, legal };

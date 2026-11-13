@@ -1,40 +1,16 @@
-import { useRef, useState } from 'react';
 import { contact } from '../shared.js';
-import { useContent, useLang } from '../i18n.jsx';
-import ContactForm from './ContactForm.jsx';
+import { useContent, useLang, langues } from '../i18n.jsx';
 
 export default function Contact() {
   const { contactSection } = useContent();
   const lang = useLang();
-  const dialogue = useRef(null);
-  const [ouvert, setOuvert] = useState(false);
+  const lienContact = langues.find((l) => l.code === lang).contact;
 
   const t = lang === 'fr'
-    ? { ecrire: 'Écrivez-moi', appeler: 'Appelez-moi', fermer: 'Fermer',
-        titre: 'Écrivez-moi', sousTitre: 'Je vous réponds sous 24 h ouvrées.',
-        plutot: 'Vous préférez votre messagerie ?' }
-    : { ecrire: 'Write to me', appeler: 'Call me', fermer: 'Close',
-        titre: 'Write to me', sousTitre: 'I reply within one working day.',
-        plutot: 'Prefer your own mail app?' };
-
-  function ouvrir(e) {
-    const d = dialogue.current;
-    // Sans <dialog>, on laisse le lien mailto faire son travail.
-    if (!d || typeof d.showModal !== 'function') return;
-    e.preventDefault();
-    d.showModal();
-    setOuvert(true);
-  }
-
-  function fermer() {
-    dialogue.current?.close();
-    setOuvert(false);
-  }
-
-  // Clic en dehors du contenu : le <dialog> reçoit l'événement lui-même.
-  function clicFond(e) {
-    if (e.target === dialogue.current) fermer();
-  }
+    ? { ecrire: 'Écrire un message', appeler: 'Appelez-moi', ecrivez: 'Écrivez-moi',
+        ensuite: 'Ce qui se passe ensuite' }
+    : { ecrire: 'Write a message', appeler: 'Call me', ecrivez: 'Write to me',
+        ensuite: 'What happens next' };
 
   return (
     <section id="contact" className="contact" data-reveal>
@@ -49,34 +25,16 @@ export default function Contact() {
               <span className="label">{t.appeler}</span>
               <strong>{contact.phone}</strong>
             </a>
-
-            {/* Reste un lien mailto : si le navigateur ne gère pas <dialog>,
-                le comportement d'origine est conservé. */}
-            <a className="contact-direct" href={`mailto:${contact.email}`} onClick={ouvrir}>
-              <span className="label">{t.ecrire}</span>
+            {/* Mène à la page de contact : un mailto n'ouvre rien quand aucune
+                messagerie n'est configurée, ce qui est fréquent. */}
+            <a className="contact-direct" href={lienContact}>
+              <span className="label">{t.ecrivez}</span>
               <strong>{contact.email}</strong>
             </a>
 
-            <ul className="reassure">
-              {contactSection.rassurances.map(([titre, texte]) => (
-                <li key={titre}>
-                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                    <path d="M20 6 9 17l-5-5" />
-                  </svg>
-                  <div>
-                    <strong>{titre}</strong>
-                    <span>{texte}</span>
-                  </div>
-                </li>
-              ))}
-            </ul>
-
-            <div className="steps-next">
-              <div className="label">{contactSection.etapes && (lang === 'fr' ? 'Ce qui se passe ensuite' : 'What happens next')}</div>
-              <ol>
-                {contactSection.etapes.map((e) => <li key={e}>{e}</li>)}
-              </ol>
-            </div>
+            <a className="btn btn-primary btn-block contact-cta" href={lienContact}>
+              {t.ecrire}
+            </a>
 
             <div className="contact-profils">
               {contact.linkedin && (
@@ -100,29 +58,29 @@ export default function Contact() {
             </div>
           </div>
 
-          <div className="contact-form-card">
-            <ContactForm idPrefix="inline" />
+          <div className="contact-promesses">
+            <ul className="reassure">
+              {contactSection.rassurances.map(([titre, texte]) => (
+                <li key={titre}>
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <path d="M20 6 9 17l-5-5" />
+                  </svg>
+                  <div>
+                    <strong>{titre}</strong>
+                    <span>{texte}</span>
+                  </div>
+                </li>
+              ))}
+            </ul>
+            <div className="steps-next">
+              <div className="label">{t.ensuite}</div>
+              <ol>
+                {contactSection.etapes.map((e) => <li key={e}>{e}</li>)}
+              </ol>
+            </div>
           </div>
         </div>
       </div>
-
-      {/* Fenêtre ouverte depuis « Écrivez-moi » : le formulaire inline est loin
-          sur téléphone, et le mailto ne fonctionne pas sans client de messagerie. */}
-      <dialog className="modale" ref={dialogue} onClick={clicFond} onClose={() => setOuvert(false)}>
-        <div className="modale-contenu">
-          <button className="modale-fermer" type="button" onClick={fermer} aria-label={t.fermer}>
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
-              <path d="M6 6l12 12M18 6L6 18" />
-            </svg>
-          </button>
-          <h3 className="modale-titre">{t.titre}</h3>
-          <p className="modale-sous-titre">{t.sousTitre}</p>
-          {ouvert && <ContactForm idPrefix="modale" />}
-          <p className="modale-alt">
-            {t.plutot} <a href={`mailto:${contact.email}`}>{contact.email}</a>
-          </p>
-        </div>
-      </dialog>
     </section>
   );
 }
