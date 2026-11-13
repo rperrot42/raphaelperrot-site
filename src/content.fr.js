@@ -23,14 +23,10 @@ const hero = {
   titleHighlight: 'gagner du temps',
   titleEnd: ' aux petites entreprises.',
   text:
-    "Développeur depuis 2023 sur un ERP/CRM SaaS utilisé chaque jour par des entreprises, je conçois aujourd'hui des sites e-commerce, des outils sur mesure et des automatisations. Un seul interlocuteur, un prix fixé à l'avance, et un résultat que vous pouvez modifier vous-même.",
+    "Développeur depuis 2023 sur un ERP/CRM SaaS utilisé chaque jour par des entreprises, je conçois aujourd'hui des outils métier sur mesure, des automatisations et des sites e-commerce. Un seul interlocuteur, un prix fixé à l'avance, et un résultat que vous pouvez modifier vous-même.",
 };
 
 const services = [
-  {
-    title: 'Sites e-commerce',
-    text: 'Boutique en ligne sur Shopify, configurateur de produits, paiement, espace client. Vous gardez la main sur vos textes et vos photos.',
-  },
   {
     title: 'Outils sur mesure',
     text: "Gestion de stock, planning, suivi de commandes : des applications web pensées pour votre façon de travailler, pas l'inverse.",
@@ -38,6 +34,10 @@ const services = [
   {
     title: 'Automatisations',
     text: 'Devis, factures, relances, rappels de rendez-vous : les tâches répétitives se font toutes seules.',
+  },
+  {
+    title: 'Sites e-commerce',
+    text: 'Boutique en ligne sur Shopify, configurateur de produits, paiement, espace client. Vous gardez la main sur vos textes et vos photos.',
   },
 ];
 
@@ -123,7 +123,8 @@ const experience = [
     sub: 'Ingénierie logicielle par projets · tronc commun terminé',
     points: [
       "Formation sans professeurs : on apprend en construisant, et chaque projet est validé par les autres étudiants.",
-      'Projets marquants : une application web complète, un serveur HTTP et un shell Unix écrits de zéro, un moteur de ray tracing.',
+      'Beaucoup de programmation bas niveau, en C et en C++ : gestion mémoire, processus, réseau, assembleur — tout écrit de zéro, sans bibliothèque.',
+      'Projets marquants : un serveur HTTP, un shell Unix, un moteur de ray tracing, et une application web complète.',
     ],
     // Repliés par défaut : visibles pour qui veut le détail, invisibles pour les autres.
     more: [
@@ -194,6 +195,7 @@ const about = {
   title: 'Ce que je mets dans un projet',
   paragraphs: [
     "Quand j'ai découvert le code, j'ai tout de suite accroché. Construire quelque chose qui fonctionne, le casser, le reprendre jusqu'à ce que ça tourne : je n'ai jamais trouvé ça fatigant. C'est cette passion qui m'a conduit à l'École 42, où l'on apprend exactement comme ça, en construisant.",
+    "Ce que je fais le mieux, c'est la partie invisible : la logique, les données, ce qui fait qu'un outil tient la charge et ne perd rien. J'ai appris le métier par le bas — en C et en C++, à écrire de zéro ce que les autres importent — et c'est là que j'ai pris l'habitude de comprendre ce que fait vraiment le code que j'écris.",
     "J'ai commencé à travailler tôt, en cuisine à la guinguette de Muret Plage. Le travail n'a jamais été une corvée pour moi, et ça n'a pas changé : je donne tout à ce que j'entreprends, c'est la seule façon que je connaisse. Ma plus grande satisfaction n'est pas de réussir facilement, c'est d'atteindre un objectif pour lequel je me suis donné à fond.",
     "J'aime la compétition et l'intensité — le VTT en Coupe de France, le triathlon. Ce goût de l'engagement total, je le mets au service de mes clients : quand je prends un projet, je le prends entièrement.",
     "J'aime voyager, voir d'autres endroits et d'autres façons de faire. Je n'ai pas envie de passer ma vie derrière un écran — et je crois que ça me rend meilleur devant : on a de meilleures idées quand on regarde ailleurs.",
@@ -244,33 +246,9 @@ const servicesPage = {
   title: 'Ce que je peux construire pour vous',
   intro:
     "Chaque métier a ses contraintes. Voici concrètement ce que je sais faire, et dans quel cas c'est la bonne réponse.",
+  franchise:
+    "Certaines de ces prestations, je les ai déjà livrées. D'autres s'appuient sur ce que je construis au quotidien en entreprise, sur une plateforme utilisée par de vraies sociétés. Si vous me demandez quelque chose que je n'ai jamais fait, je vous le dirai avant de m'engager — et je vous dirai aussi si quelqu'un d'autre est mieux placé.",
   blocs: [
-    {
-      titre: 'Boutique en ligne Shopify',
-      pour: 'Vous vendez des produits et vous voulez les proposer en ligne.',
-      texte:
-        "Je monte votre boutique sur Shopify : fiches produits, paiement sécurisé, livraison, codes promo, espace client. Vous gérez ensuite vos produits et vos prix vous-même, depuis une interface simple, sans dépendre de moi pour le quotidien.",
-      exemples: [
-        'Catalogue et fiches produits',
-        'Paiement par carte, virement ou en plusieurs fois',
-        'Suivi des commandes et des stocks',
-        'Configurateur de produit sur mesure',
-        'Connexion à votre logiciel de caisse ou de comptabilité',
-      ],
-    },
-    {
-      titre: 'Site vitrine',
-      pour: "Vos clients vous cherchent sur Google et ne vous trouvent pas.",
-      texte:
-        "Un site qui présente votre activité, vos réalisations et vos coordonnées, pensé pour être trouvé sur les recherches locales. Rapide à charger, lisible sur téléphone, et modifiable par vous une fois livré.",
-      exemples: [
-        'Présentation de vos prestations',
-        'Galerie de réalisations',
-        'Formulaire de contact et prise de rendez-vous',
-        'Référencement local (Google, fiche établissement)',
-        'Mentions légales et conformité RGPD',
-      ],
-    },
     {
       titre: 'Logiciel métier sur mesure',
       pour: "Vous faites tourner votre activité sur un tableur qui a atteint ses limites.",
@@ -282,6 +260,19 @@ const servicesPage = {
         'Suivi de commandes ou de chantiers',
         'Base clients et historique',
         'Tableaux de bord et exports',
+      ],
+    },
+    {
+      titre: 'Connexion entre vos logiciels',
+      pour: 'Vos outils ne se parlent pas et vous faites le lien à la main.',
+      texte:
+        "Caisse, comptabilité, boutique en ligne, agenda, logiciel de devis : je les connecte pour que l'information circule toute seule. C'est mon métier au quotidien sur une plateforme utilisée par des entreprises.",
+      exemples: [
+        'Synchronisation entre caisse et boutique en ligne',
+        'Export vers votre comptable',
+        'Connexion à votre agenda',
+        'Reprise et migration de vos données',
+        "Création d'une API pour vos partenaires",
       ],
     },
     {
@@ -298,6 +289,32 @@ const servicesPage = {
       ],
     },
     {
+      titre: 'Site vitrine',
+      pour: "Vos clients vous cherchent sur Google et ne vous trouvent pas.",
+      texte:
+        "Un site qui présente votre activité, vos réalisations et vos coordonnées, pensé pour être trouvé sur les recherches locales. Rapide à charger, lisible sur téléphone, et modifiable par vous une fois livré.",
+      exemples: [
+        'Présentation de vos prestations',
+        'Galerie de réalisations',
+        'Formulaire de contact et prise de rendez-vous',
+        'Référencement local (Google, fiche établissement)',
+        'Mentions légales et conformité RGPD',
+      ],
+    },
+    {
+      titre: 'Boutique en ligne Shopify',
+      pour: 'Vous vendez des produits et vous voulez les proposer en ligne.',
+      texte:
+        "Je monte votre boutique sur Shopify : fiches produits, paiement sécurisé, livraison, codes promo, espace client. Vous gérez ensuite vos produits et vos prix vous-même, depuis une interface simple, sans dépendre de moi pour le quotidien.",
+      exemples: [
+        'Catalogue et fiches produits',
+        'Paiement par carte, virement ou en plusieurs fois',
+        'Suivi des commandes et des stocks',
+        'Configurateur de produit sur mesure',
+        'Connexion à votre logiciel de caisse ou de comptabilité',
+      ],
+    },
+    {
       titre: 'Application mobile',
       pour: "Vos clients ou vos équipes ont besoin de l'outil dans leur poche.",
       texte:
@@ -308,19 +325,6 @@ const servicesPage = {
         'Notifications',
         'Accès caméra et géolocalisation',
         'Une seule version pour iPhone et Android',
-      ],
-    },
-    {
-      titre: 'Connexion entre vos logiciels',
-      pour: 'Vos outils ne se parlent pas et vous faites le lien à la main.',
-      texte:
-        "Caisse, comptabilité, boutique en ligne, agenda, logiciel de devis : je les connecte pour que l'information circule toute seule. C'est mon métier au quotidien sur une plateforme utilisée par des entreprises.",
-      exemples: [
-        'Synchronisation entre caisse et boutique en ligne',
-        'Export vers votre comptable',
-        'Connexion à votre agenda',
-        'Reprise et migration de vos données',
-        "Création d'une API pour vos partenaires",
       ],
     },
     {
@@ -348,7 +352,7 @@ const servicesPage = {
         'Sauvegardes et sécurisation',
         'Formation pour que vous repreniez la main',
       ],
-    },
+    }
   ],
   aussi: {
     titre: 'Et aussi',

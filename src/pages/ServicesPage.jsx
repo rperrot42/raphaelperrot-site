@@ -14,6 +14,9 @@ export default function ServicesPage() {
         <div className="eyebrow">{servicesPage.eyebrow}</div>
         <h1>{servicesPage.title}</h1>
         <p className="intro">{servicesPage.intro}</p>
+        {servicesPage.franchise && (
+          <p className="franchise">{servicesPage.franchise}</p>
+        )}
 
         <div className="offres">
           {servicesPage.blocs.map((b) => (

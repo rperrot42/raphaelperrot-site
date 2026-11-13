@@ -22,14 +22,10 @@ const hero = {
   titleHighlight: 'save small businesses time',
   titleEnd: '.',
   text:
-    "I have been building a SaaS ERP/CRM used daily by companies since 2023. Today I design e-commerce sites, custom tools and automation for small businesses. One person to talk to, a price agreed upfront, and a result you can edit yourself.",
+    "I have been building a SaaS ERP/CRM used daily by companies since 2023. Today I design custom business tools, automation and e-commerce sites for small companies. One person to talk to, a price agreed upfront, and a result you can edit yourself.",
 };
 
 const services = [
-  {
-    title: 'E-commerce sites',
-    text: 'Online stores on Shopify, product configurators, payment, customer accounts. You stay in control of your own copy and photos.',
-  },
   {
     title: 'Custom business tools',
     text: 'Stock management, scheduling, order tracking: web applications built around the way you work, not the other way round.',
@@ -37,6 +33,10 @@ const services = [
   {
     title: 'Automation',
     text: 'Quotes, invoices, follow-ups, appointment reminders: the repetitive work takes care of itself.',
+  },
+  {
+    title: 'E-commerce sites',
+    text: 'Online stores on Shopify, product configurators, payment, customer accounts. You stay in control of your own copy and photos.',
   },
 ];
 
@@ -117,7 +117,8 @@ const experience = [
     sub: 'Project-based software engineering · core curriculum completed',
     points: [
       'A school with no teachers: you learn by building, and every project is reviewed by fellow students.',
-      'Notable projects: a full web application, an HTTP server and a Unix shell written from scratch, a ray tracing engine.',
+      'A lot of low-level programming in C and C++: memory management, processes, networking, assembly — all written from scratch, with no libraries.',
+      'Notable projects: an HTTP server, a Unix shell, a ray tracing engine, and a full web application.',
     ],
     more: [
       'ft_transcendence — full web application, final project of the core curriculum',
@@ -186,6 +187,7 @@ const about = {
   title: 'What I bring to a project',
   paragraphs: [
     'When I discovered code, it clicked straight away. Building something that works, breaking it, going back to it until it runs: I have never found that tiring. That is what led me to École 42, where you learn in exactly that way, by building.',
+    'What I do best is the invisible part: the logic, the data, what makes a tool hold up under load and lose nothing. I learned the craft from the bottom — in C and C++, writing from scratch what others import — and that is where I picked up the habit of understanding what my code actually does.',
     'I started working early, cooking at an open-air riverside restaurant near Toulouse. Work has never felt like a chore to me, and that has not changed: I give everything to what I take on, it is the only way I know. My greatest satisfaction is not winning easily, it is reaching a goal I gave everything for.',
     'I like competition and intensity — mountain biking at French Cup level, triathlon. That appetite for full commitment is what I bring to my clients: when I take on a project, I take all of it.',
     'I like to travel, to see other places and other ways of doing things. I have no wish to spend my life behind a screen — and I believe that makes me better in front of one: you have better ideas when you look elsewhere.',
@@ -235,33 +237,9 @@ const servicesPage = {
   title: 'What I can build for you',
   intro:
     'Every trade has its own constraints. Here is concretely what I can build, and when each one is the right answer.',
+  franchise:
+    'Some of these I have already delivered. Others build on what I work on daily inside a company, on a platform used by real businesses. If you ask me for something I have never done, I will tell you before committing — and I will tell you if someone else is better placed.',
   blocs: [
-    {
-      titre: 'Shopify online store',
-      pour: 'You sell products and want to offer them online.',
-      texte:
-        'I build your store on Shopify: product pages, secure payment, shipping, discount codes, customer accounts. You then manage your products and prices yourself, through a simple interface, without depending on me day to day.',
-      exemples: [
-        'Catalogue and product pages',
-        'Card, transfer or instalment payment',
-        'Order and stock tracking',
-        'Custom product configurator',
-        'Connection to your till or accounting software',
-      ],
-    },
-    {
-      titre: 'Brochure site',
-      pour: 'Your customers search for you on Google and find nothing.',
-      texte:
-        'A site presenting your business, your work and how to reach you, built to be found in local searches. Fast to load, readable on a phone, and editable by you once delivered.',
-      exemples: [
-        'Presentation of your services',
-        'Portfolio gallery',
-        'Contact form and appointment booking',
-        'Local SEO and business listing',
-        'Legal notice and GDPR compliance',
-      ],
-    },
     {
       titre: 'Custom business software',
       pour: 'You run your business on a spreadsheet that has hit its limits.',
@@ -273,6 +251,19 @@ const servicesPage = {
         'Order or job tracking',
         'Customer records and history',
         'Dashboards and exports',
+      ],
+    },
+    {
+      titre: 'Connecting your software together',
+      pour: 'Your tools do not talk to each other and you bridge the gap by hand.',
+      texte:
+        'Till system, accounting, online store, calendar, quoting software: I connect them so information flows on its own. This is my day job on a platform used by companies.',
+      exemples: [
+        'Sync between till and online store',
+        'Export to your accountant',
+        'Calendar integration',
+        'Data migration from your old system',
+        'Building an API for your partners',
       ],
     },
     {
@@ -289,6 +280,32 @@ const servicesPage = {
       ],
     },
     {
+      titre: 'Brochure site',
+      pour: 'Your customers search for you on Google and find nothing.',
+      texte:
+        'A site presenting your business, your work and how to reach you, built to be found in local searches. Fast to load, readable on a phone, and editable by you once delivered.',
+      exemples: [
+        'Presentation of your services',
+        'Portfolio gallery',
+        'Contact form and appointment booking',
+        'Local SEO and business listing',
+        'Legal notice and GDPR compliance',
+      ],
+    },
+    {
+      titre: 'Shopify online store',
+      pour: 'You sell products and want to offer them online.',
+      texte:
+        'I build your store on Shopify: product pages, secure payment, shipping, discount codes, customer accounts. You then manage your products and prices yourself, through a simple interface, without depending on me day to day.',
+      exemples: [
+        'Catalogue and product pages',
+        'Card, transfer or instalment payment',
+        'Order and stock tracking',
+        'Custom product configurator',
+        'Connection to your till or accounting software',
+      ],
+    },
+    {
       titre: 'Mobile application',
       pour: 'Your customers or your teams need the tool in their pocket.',
       texte:
@@ -299,19 +316,6 @@ const servicesPage = {
         'Notifications',
         'Camera and location access',
         'One version for both iPhone and Android',
-      ],
-    },
-    {
-      titre: 'Connecting your software together',
-      pour: 'Your tools do not talk to each other and you bridge the gap by hand.',
-      texte:
-        'Till system, accounting, online store, calendar, quoting software: I connect them so information flows on its own. This is my day job on a platform used by companies.',
-      exemples: [
-        'Sync between till and online store',
-        'Export to your accountant',
-        'Calendar integration',
-        'Data migration from your old system',
-        'Building an API for your partners',
       ],
     },
     {
@@ -339,7 +343,7 @@ const servicesPage = {
         'Backups and hardening',
         'Training so you can take control again',
       ],
-    },
+    }
   ],
   aussi: {
     titre: 'And also',
