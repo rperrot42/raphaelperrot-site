@@ -156,6 +156,14 @@ export const sport = {
     "Je travaille beaucoup, et c'est le sport qui m'a appris à le faire dans la durée : on ne progresse pas en forçant un jour sur deux, mais en répétant sans sauter de séance. Je m'entraîne toute l'année, accompagné par un coach, avec des objectifs fixés plusieurs mois à l'avance. J'aborde les projets de mes clients de la même façon : une échéance claire, des étapes régulières, et rien qui se joue à la dernière minute.",
   // Pour ajouter une vidéo VTT : colle ici l'identifiant YouTube (la partie après « v= »).
   youtubeId: '',
+  photo: {
+    base: '/photos/velo-alpha',
+    largeurs: [500, 800, 1200],
+    width: 1200,
+    height: 900,
+    alt: "Vélo de route Alpha Aero SL : cadre carbone bleu nuit, roues à profil haut, posé dans l'herbe au bord d'une route.",
+    legende: 'Mon vélo de route, un Alpha Aero SL.',
+  },
   cards: [
     {
       title: 'VTT',
