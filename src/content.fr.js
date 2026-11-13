@@ -55,9 +55,9 @@ const projects = [
     url: 'https://valentine-lacroix-avocat.fr/',
     image: {
       base: '/photos/projet-lacroix',
-      largeurs: [500, 800, 1100],
-      width: 1100,
-      height: 690,
+      largeurs: [600, 900, 1383],
+      width: 1383,
+      height: 868,
       alt: "Page d'accueil du site de Maître Valentine Lacroix, avocate en droit des sociétés.",
     },
   },

@@ -19,12 +19,12 @@ export default function Work() {
                   <source
                     type="image/webp"
                     srcSet={p.image.largeurs.map((w) => `${p.image.base}-${w}.webp ${w}w`).join(', ')}
-                    sizes="(max-width: 760px) 100vw, 560px"
+                    sizes="(max-width: 900px) 100vw, 860px"
                   />
                   <img
-                    src={`${p.image.base}-800.jpg`}
+                    src={`${p.image.base}-1383.jpg`}
                     srcSet={p.image.largeurs.map((w) => `${p.image.base}-${w}.jpg ${w}w`).join(', ')}
-                    sizes="(max-width: 760px) 100vw, 560px"
+                    sizes="(max-width: 900px) 100vw, 860px"
                     width={p.image.width}
                     height={p.image.height}
                     alt={p.image.alt}
