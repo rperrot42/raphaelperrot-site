@@ -118,9 +118,19 @@ const experience = [
     ],
   },
   {
+    when: '2023',
+    title: "Jeu d'échecs en C, avec une IA qui y joue",
+    sub: 'Projet personnel',
+    points: [
+      "Le jeu complet écrit en C : le plateau, les règles, les coups légaux.",
+      "Une intelligence artificielle capable de jouer une partie entière contre un adversaire humain.",
+    ],
+    tags: ['C', 'Algorithmique', 'IA'],
+  },
+  {
     when: '2023 — 2026',
     title: 'École 42 Lyon',
-    sub: 'Ingénierie logicielle par projets · tronc commun terminé',
+    sub: 'Ingénierie logicielle par projets · piscine en juillet 2023, tronc commun terminé',
     points: [
       "Formation sans professeurs : on apprend en construisant, et chaque projet est validé par les autres étudiants.",
       'Beaucoup de programmation bas niveau, en C et en C++ : gestion mémoire, processus, réseau, assembleur — tout écrit de zéro, sans bibliothèque.',

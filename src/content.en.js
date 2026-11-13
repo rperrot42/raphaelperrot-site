@@ -112,9 +112,19 @@ const experience = [
     ],
   },
   {
+    when: '2023',
+    title: 'A chess game in C, with an AI that plays it',
+    sub: 'Personal project',
+    points: [
+      'The whole game written in C: the board, the rules, legal moves.',
+      'An artificial intelligence able to play a full game against a human opponent.',
+    ],
+    tags: ['C', 'Algorithms', 'AI'],
+  },
+  {
     when: '2023 — 2026',
     title: 'École 42 Lyon',
-    sub: 'Project-based software engineering · core curriculum completed',
+    sub: 'Project-based software engineering · selection month July 2023, core curriculum completed',
     points: [
       'A school with no teachers: you learn by building, and every project is reviewed by fellow students.',
       'A lot of low-level programming in C and C++: memory management, processes, networking, assembly — all written from scratch, with no libraries.',
