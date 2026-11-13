@@ -52,7 +52,24 @@ Si tu modifies `--green` ou `--accent`, vérifie le contraste avant de publier.
 
 Le site est statique : il n'y a ni PHP ni base de données à configurer.
 
-### Une fois pour toutes
+Deux voies existent dans ce dépôt. La première est automatique, la seconde sert de
+repli et de dépannage.
+
+### Voie 1 — automatique, à chaque push (`.github/workflows/deploy.yml`)
+
+À chaque push sur `main`, GitHub compile le site et publie le contenu de `dist`
+sur la branche **`deploy`**. L'hébergement OVH suit cette branche.
+
+Rien à installer côté machine : `git push` suffit.
+
+> **À vérifier avant de compter dessus :** cette voie suppose que ton offre OVH
+> propose bien le déploiement depuis un dépôt Git. Toutes les offres mutualisées
+> ne l'ont pas. Si l'option est absente de ton espace client, la voie 2 ci-dessous
+> fonctionne partout.
+
+### Voie 2 — manuelle, par FTP (`deploy/deploy.sh`)
+
+**Une fois pour toutes :**
 
 1. Installer l'outil de transfert : `brew install lftp`
 2. Récupérer les identifiants FTP dans l'espace client OVH :
@@ -60,7 +77,7 @@ Le site est statique : il n'y a ni PHP ni base de données à configurer.
 3. `cp deploy/.env.example deploy/.env` puis renseigner `OVH_HOST`, `OVH_USER`, `OVH_PASSWORD`.
    `deploy/.env` est ignoré par git : les identifiants ne partent jamais sur GitHub.
 
-### À chaque mise à jour
+**À chaque mise à jour :**
 
 ```bash
 ./deploy/deploy.sh
