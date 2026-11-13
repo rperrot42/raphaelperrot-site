@@ -180,6 +180,7 @@ export const about = {
   eyebrow: 'Qui je suis',
   title: 'Ce que je mets dans un projet',
   paragraphs: [
+    "Quand j'ai découvert le code, j'ai tout de suite accroché. Construire quelque chose qui fonctionne, le casser, le reprendre jusqu'à ce que ça tourne : je n'ai jamais trouvé ça fatigant. C'est cette passion qui m'a conduit à l'École 42, où l'on apprend exactement comme ça, en construisant.",
     "Je donne tout à ce que j'entreprends, c'est la seule façon de travailler que je connaisse. Ma plus grande satisfaction n'est pas de réussir facilement : c'est d'atteindre un objectif pour lequel je me suis donné à fond.",
     "J'aime la compétition et l'intensité — le VTT en Coupe de France, le triathlon. Ce goût de l'engagement total, je le mets au service de mes clients : quand je prends un projet, je le prends entièrement.",
     "Et je n'oublie pas d'où je viens. J'ai de la chance, et je préfère réussir avec les gens plutôt qu'à leurs dépens. C'est pour ça que je travaille avec des petites structures : on se parle directement, sans intermédiaire, et je m'implique vraiment dans ce que vous construisez.",
