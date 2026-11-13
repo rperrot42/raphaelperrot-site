@@ -15,6 +15,16 @@ export default function Sport() {
           />
         </div>
       )}
+      <div className="grid">
+        {sport.cards.map((c) => (
+          <article className="card" key={c.title}>
+            <h3>{c.title}</h3>
+            {c.lines.map((l) => (
+              <p key={l}>{l}</p>
+            ))}
+          </article>
+        ))}
+      </div>
     </Section>
   );
 }

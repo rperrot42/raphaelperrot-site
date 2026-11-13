@@ -39,6 +39,20 @@ export default function Contact() {
         <div className="btns">
           <a className="btn btn-primary" href={`mailto:${contact.email}`}>{contact.email}</a>
           <a className="btn btn-ghost" href={contact.phoneLink}>{contact.phone}</a>
+          {contact.linkedin && (
+            <a
+              className="btn btn-ghost"
+              href={contact.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className="btn-icon">
+                <path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM2.4 21h5.16V9.5H2.4V21zm7.74-11.5V21h5.16v-6.36c0-1.68.32-3.3 2.4-3.3 2.05 0 2.08 1.92 2.08 3.4V21H24v-7.3c0-4.3-.93-7.6-5.95-7.6-2.42 0-4.04 1.33-4.7 2.58h-.07V9.5h-3.14z" />
+              </svg>
+              LinkedIn
+              <span className="sr-only"> (nouvelle fenêtre)</span>
+            </a>
+          )}
         </div>
 
         {contact.formEndpoint && (

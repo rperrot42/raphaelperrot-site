@@ -73,6 +73,7 @@ section { padding: 72px 0; border-top: 1px solid var(--line); }
 .btn-primary:hover { background: #0b241d; }
 .btn-primary[disabled] { opacity: 0.6; cursor: default; }
 .btn-ghost { border: 1.5px solid var(--ink); color: var(--ink); background: none; }
+.btn-icon { margin-right: 8px; flex-shrink: 0; }
 .btn-ghost:hover { background: var(--ink); color: var(--bg); }
 
 /* Cartes */

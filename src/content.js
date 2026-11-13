@@ -12,6 +12,11 @@ export const contact = {
   phone: '07 69 27 60 73',
   phoneLink: 'tel:+33769276073',
 
+  // ⚠️ À COMPLÉTER : colle l'URL complète de ton profil LinkedIn
+  // (ex. https://www.linkedin.com/in/ton-identifiant/).
+  // Tant que c'est vide, le bouton LinkedIn ne s'affiche pas.
+  linkedin: '',
+
   siret: '985 308 931 00015',
   address: '232 route de Saint-Sulpice, 31410 Mauzac',
 
@@ -138,9 +143,23 @@ export const experience = [
 export const sport = {
   title: 'Le vélo, depuis plus de dix ans',
   text:
-    "VTT en Coupe de France, enduro, triathlon, courses sur route. Le sport m'a appris la régularité et à tenir un objectif dans la durée — j'aborde les projets de mes clients de la même façon.",
+    "Le sport m'a appris la régularité et à tenir un objectif dans la durée. J'aborde les projets de mes clients de la même façon.",
   // Pour ajouter une vidéo VTT : colle ici l'identifiant YouTube (la partie après « v= »).
   youtubeId: '',
+  cards: [
+    {
+      title: 'VTT',
+      lines: ["Coupes de France en cross-country, aujourd'hui de l'enduro."],
+    },
+    {
+      title: 'Triathlon',
+      lines: ["Triathlon d'Embrun, format M, en 2026.", 'Semi-marathon en 1h36.'],
+    },
+    {
+      title: 'Endurance',
+      lines: ['Plus longue sortie : 187 km et 2 330 m de dénivelé.'],
+    },
+  ],
 };
 
 export const legal = {
