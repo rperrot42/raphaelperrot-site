@@ -178,7 +178,7 @@ const about = {
   title: 'What I bring to a project',
   paragraphs: [
     'When I discovered code, it clicked straight away. Building something that works, breaking it, going back to it until it runs: I have never found that tiring. That is what led me to École 42, where you learn in exactly that way, by building.',
-    'I started working early, waiting tables at a riverside restaurant. Work has never felt like a chore to me, and that has not changed: I give everything to what I take on, it is the only way I know. My greatest satisfaction is not winning easily, it is reaching a goal I gave everything for.',
+    'I started working early, cooking at an open-air riverside restaurant near Toulouse. Work has never felt like a chore to me, and that has not changed: I give everything to what I take on, it is the only way I know. My greatest satisfaction is not winning easily, it is reaching a goal I gave everything for.',
     'I like competition and intensity — mountain biking at French Cup level, triathlon. That appetite for full commitment is what I bring to my clients: when I take on a project, I take all of it.',
     'I like to travel, to see other places and other ways of doing things. I have no wish to spend my life behind a screen — and I believe that makes me better in front of one: you have better ideas when you look elsewhere.',
     'I do not forget how lucky I am. I would rather succeed alongside people than at their expense, and that is why I work with small organisations: we talk directly, with nobody in between, and I genuinely invest myself in what you are building.',
