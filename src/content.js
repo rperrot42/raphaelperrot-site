@@ -111,6 +111,18 @@ export const experience = [
     tags: ['Java', 'Spring Boot', 'Kubernetes', 'PostgreSQL', 'Jenkins', 'Microservices'],
   },
   {
+    when: '2025',
+    title: "Hackathon — la frugalité de l'IA",
+    sub: "Concevoir des usages de l'intelligence artificielle sobres en ressources",
+    points: [
+      // ⚠️ À COMPLÉTER : remplace cette ligne par ce que tu as réellement
+      // construit, et mentionne ton classement si tu en as eu un.
+      // « A participé » ne pèse rien ; « a conçu X qui divise par N la
+      // consommation de Y » pèse beaucoup.
+      "Travail sur la réduction du coût en ressources de calcul des usages de l'IA.",
+    ],
+  },
+  {
     when: '2023 — 2026',
     title: 'École 42 Lyon',
     sub: 'Ingénierie logicielle par projets · tronc commun terminé',
