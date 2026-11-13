@@ -58,7 +58,7 @@ export const services = [
 export const projects = [
   {
     title: 'Valentine Lacroix, avocate',
-    sub: 'Site vitrine · 2026',
+    sub: 'Site vitrine · depuis 2024',
     problem:
       "Une avocate qui démarre son cabinet et n'existait pas en ligne : ses futurs clients la cherchaient sur Google sans la trouver.",
     done: "Un site clair qui présente ses domaines d'intervention et permet de la contacter en deux clics, consultable depuis un téléphone comme depuis un ordinateur.",
@@ -88,7 +88,7 @@ export const method = [
 
 export const experience = [
   {
-    when: 'Depuis 2026',
+    when: 'Depuis 2024',
     title: 'Développeur freelance',
     sub: 'Auto-entrepreneur · Toulouse et Haute-Garonne',
     points: [
