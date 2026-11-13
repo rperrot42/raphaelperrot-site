@@ -31,7 +31,7 @@ source "$ENV_FILE"
 : "${OVH_USER:?OVH_USER manquant dans $ENV_FILE}"
 : "${OVH_PASSWORD:?OVH_PASSWORD manquant dans $ENV_FILE}"
 REMOTE_DIR="${OVH_REMOTE_DIR:-/www}"
-PROTOCOL="${OVH_PROTOCOL:-ftps}"   # ftps (toutes offres) ou sftp (Pro / Performance)
+PROTOCOL="${OVH_PROTOCOL:-ftp}"   # ftp + TLS forcé (port 21, explicite) ; sftp possible aussi
 
 if ! command -v lftp >/dev/null 2>&1; then
   echo "lftp est requis. Installe-le avec :  brew install lftp"

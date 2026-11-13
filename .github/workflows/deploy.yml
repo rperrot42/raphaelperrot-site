@@ -36,11 +36,12 @@ jobs:
             exit 1
           fi
           sudo apt-get update -qq && sudo apt-get install -y -qq lftp
-          lftp --env-password -u "$OVH_USER" "ftps://$OVH_HOST" -e "
+          lftp --env-password -u "$OVH_USER" "ftp://$OVH_HOST" -e "
             set ftp:ssl-force true;
             set ftp:ssl-protect-data true;
             set ssl:verify-certificate true;
-            set net:max-retries 3;
+            set net:max-retries 2;
+            set net:reconnect-interval-base 5;
             set net:timeout 15;
             mirror --reverse --delete --verbose --parallel=4 --exclude-glob .DS_Store dist/ /www;
             bye"
