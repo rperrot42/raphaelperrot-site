@@ -1,7 +1,7 @@
 name: Build et deploy OVH
 
 # L'hébergement gratuit OVH n'a pas l'intégration Git : on compile ici
-# puis on envoie dist/ dans www/ par FTPS (même logique que deploy/deploy.sh).
+# puis on envoie dist/ dans www/ par SFTP (même logique que deploy/deploy.sh).
 
 on:
   push:
@@ -25,7 +25,7 @@ jobs:
       - run: npm run build
       - name: Vérifier la présence du .htaccess
         run: test -f dist/.htaccess
-      - name: Envoi sur l'hébergement OVH (FTPS)
+      - name: Envoi sur l'hébergement OVH (SFTP)
         env:
           OVH_HOST: ftp.cluster129.hosting.ovh.net
           OVH_USER: raphaqm
@@ -36,12 +36,12 @@ jobs:
             exit 1
           fi
           sudo apt-get update -qq && sudo apt-get install -y -qq lftp
-          lftp --env-password -u "$OVH_USER" "ftp://$OVH_HOST" -e "
-            set ftp:ssl-force true;
-            set ftp:ssl-protect-data true;
-            set ssl:verify-certificate true;
+          # SFTP (port 22) : l'hébergement gratuit refuse le FTP chiffré par TLS.
+          # Le dossier home est /home/raphaqm, d'où le chemin relatif "www".
+          lftp --env-password -u "$OVH_USER" "sftp://$OVH_HOST" -e "
+            set sftp:auto-confirm yes;
             set net:max-retries 2;
             set net:reconnect-interval-base 5;
-            set net:timeout 15;
-            mirror --reverse --delete --verbose --parallel=4 --exclude-glob .DS_Store dist/ /www;
+            set net:timeout 20;
+            mirror --reverse --delete --verbose --parallel=4 --exclude-glob .DS_Store dist/ www;
             bye"

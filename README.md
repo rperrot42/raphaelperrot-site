@@ -58,7 +58,7 @@ repli et de dépannage.
 ### Voie 1 — automatique, à chaque push (`.github/workflows/deploy.yml`)
 
 L'offre gratuite OVH (100 Mo) ne propose pas le déploiement depuis Git. La GitHub Action
-compile donc le site à chaque push sur `main`, puis envoie `dist/` dans `/www` par FTPS
+compile donc le site à chaque push sur `main`, puis envoie `dist/` dans `/www` par SFTP
 (`ftp.cluster129.hosting.ovh.net`, utilisateur `raphaqm`), comme le fait `deploy/deploy.sh`.
 
 **Une fois pour toutes :** dans GitHub → Settings → Secrets and variables → Actions,

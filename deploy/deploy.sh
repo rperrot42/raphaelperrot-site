@@ -30,8 +30,8 @@ source "$ENV_FILE"
 : "${OVH_HOST:?OVH_HOST manquant dans $ENV_FILE}"
 : "${OVH_USER:?OVH_USER manquant dans $ENV_FILE}"
 : "${OVH_PASSWORD:?OVH_PASSWORD manquant dans $ENV_FILE}"
-REMOTE_DIR="${OVH_REMOTE_DIR:-/www}"
-PROTOCOL="${OVH_PROTOCOL:-ftp}"   # ftp + TLS forcé (port 21, explicite) ; sftp possible aussi
+REMOTE_DIR="${OVH_REMOTE_DIR:-www}"
+PROTOCOL="${OVH_PROTOCOL:-sftp}"   # sftp (port 22) : l'offre gratuite refuse le FTP chiffré
 
 if ! command -v lftp >/dev/null 2>&1; then
   echo "lftp est requis. Installe-le avec :  brew install lftp"
@@ -53,9 +53,7 @@ echo "→ Envoi vers $PROTOCOL://$OVH_HOST$REMOTE_DIR"
 # --delete   : supprime sur le serveur les fichiers qui n'existent plus en local
 # --verbose  : affiche chaque fichier transféré
 lftp -c "
-set ftp:ssl-force true;
-set ftp:ssl-protect-data true;
-set ssl:verify-certificate true;
+set sftp:auto-confirm yes;
 set net:max-retries 3;
 set net:timeout 15;
 open -u '$OVH_USER','$OVH_PASSWORD' $PROTOCOL://$OVH_HOST;
