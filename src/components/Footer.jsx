@@ -6,7 +6,7 @@ export default function Footer() {
       <div className="wrap footer-inner">
         <span>© {new Date().getFullYear()} Raphaël Perrot · Développeur freelance</span>
         <span className="footer-links">
-          {contact.siret && <span>SIRET&nbsp;: {contact.siret}</span>}
+          <span>SIRET&nbsp;: {contact.siret}</span>
           <a href="/mentions-legales">Mentions légales</a>
         </span>
       </div>

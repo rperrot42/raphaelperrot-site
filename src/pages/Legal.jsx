@@ -31,8 +31,9 @@ export default function Legal() {
         <Line label="Responsable de la publication :">Raphaël Perrot</Line>
         <Line label="Statut :">Entrepreneur individuel (auto-entrepreneur)</Line>
         <Line label="Activité :">{legal.activity}</Line>
-        {contact.city && <Line label="Siège :">{contact.city}</Line>}
-        <Line label="SIRET :">{contact.siret || '—'}</Line>
+        {contact.address && <Line label="Siège social :">{contact.address}</Line>}
+        <Line label="SIRET :">{contact.siret}</Line>
+        {legal.registered && <Line label="Immatriculation :">{legal.registered}</Line>}
         <Line label="Contact :">
           <a href={`mailto:${contact.email}`}>{contact.email}</a> · {contact.phone}
         </Line>

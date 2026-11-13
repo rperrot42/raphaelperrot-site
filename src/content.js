@@ -12,10 +12,8 @@ export const contact = {
   phone: '07 69 27 60 73',
   phoneLink: 'tel:+33769276073',
 
-  // ⚠️ À COMPLÉTER : obligatoire dans les mentions légales (LCEN).
-  siret: '',
-  // ⚠️ À COMPLÉTER : ville + code postal suffisent pour un auto-entrepreneur à domicile.
-  city: '',
+  siret: '985 308 931 00015',
+  address: '232 route de Saint-Sulpice, 31410 Mauzac',
 
   // Pour activer le formulaire de contact : crée un formulaire gratuit sur
   // https://formspree.io et colle ici l'URL fournie (ex. https://formspree.io/f/xxxxxxx).
@@ -147,6 +145,7 @@ export const sport = {
 
 export const legal = {
   activity: 'Développement de sites internet et de logiciels',
+  registered: '21 février 2024',
   vat: "TVA non applicable, article 293 B du Code général des impôts.",
   host: {
     name: 'Vercel Inc.',
