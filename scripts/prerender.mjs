@@ -68,6 +68,13 @@ const pages = [
   },
 ];
 
+pages.push({
+  route: '/404', lang: 'fr', fichier: 'dist/404.html', url: `${SITE}/404`,
+  titre: "Page introuvable — Raphaël Perrot",
+  description: "Cette page n'existe pas ou a été déplacée.",
+  alt: `${SITE}/`, noindex: true,
+});
+
 const gabarit = readFileSync(resolve(racine, 'dist/index.html'), 'utf-8');
 const echappe = (s) => s.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
 
@@ -91,7 +98,10 @@ for (const p of pages) {
     `    <link rel="alternate" hreflang="fr" href="${fr_url}" />\n` +
     `    <link rel="alternate" hreflang="en" href="${en_url}" />\n` +
     `    <link rel="alternate" hreflang="x-default" href="${fr_url}" />\n`;
-  html = html.replace('</head>', hreflang + '  </head>');
+  // La page d'erreur ne doit pas être indexée ni déclarer d'équivalent de langue.
+  html = p.noindex
+    ? html.replace('</head>', '    <meta name="robots" content="noindex" />\n  </head>')
+    : html.replace('</head>', hreflang + '  </head>');
 
   const chemin = resolve(racine, p.fichier);
   mkdirSync(dirname(chemin), { recursive: true });

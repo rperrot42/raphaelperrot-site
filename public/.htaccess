@@ -17,11 +17,13 @@
   RewriteCond %{HTTP_HOST} ^www\. [NC]
   RewriteRule ^(.*)$ https://raphaelperrot.com/$1 [R=301,L]
 
-  # Application monopage : toute URL qui ne correspond pas à un fichier
-  # réel est servie par index.html (c'est ce qui fait marcher /mentions-legales).
-  RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteRule ^ index.html [L]
+  # Plus de réécriture générale vers index.html : chaque page existe
+  # désormais comme un vrai fichier pré-généré (/services/index.html, etc.),
+  # qu'Apache sert directement.
+  #
+  # L'ancienne réécriture renvoyait la page d'accueil en 200 pour N'IMPORTE
+  # quelle URL inexistante. Google y voyait une infinité de pages dupliquées,
+  # ce qui nuit directement à l'indexation.
 </IfModule>
 
 # ─────────────────────────────────────────────────────────────
@@ -77,8 +79,8 @@
   AddType image/svg+xml .svg
 </IfModule>
 
-# Pages d'erreur : l'application gère l'affichage côté client.
-ErrorDocument 404 /index.html
+# Vraie page d'erreur, servie avec un code 404.
+ErrorDocument 404 /404.html
 
 # Ne pas lister le contenu des dossiers
 Options -Indexes

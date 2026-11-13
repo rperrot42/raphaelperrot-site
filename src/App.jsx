@@ -12,6 +12,7 @@ import Footer from './components/Footer.jsx';
 import Legal from './pages/Legal.jsx';
 import ServicesPage from './pages/ServicesPage.jsx';
 import ContactPage from './pages/ContactPage.jsx';
+import NotFound from './pages/NotFound.jsx';
 import { LangContext, langFromPath, isLegalPath, isServicesPath, isContactPath } from './i18n.jsx';
 import { initReveal } from './reveal.js';
 
@@ -23,7 +24,8 @@ export default function App({ route }) {
   const legal = isLegalPath(path);
   const services = isServicesPath(path);
   const contactSeul = isContactPath(path);
-  const pageSeule = legal || services || contactSeul;
+  const introuvable = path === '/404';
+  const pageSeule = legal || services || contactSeul || introuvable;
 
   // Après le rendu : avant, il n'y a aucun élément à observer.
   useEffect(() => {
@@ -40,6 +42,8 @@ export default function App({ route }) {
           <ServicesPage />
         ) : contactSeul ? (
           <ContactPage />
+        ) : introuvable ? (
+          <NotFound />
         ) : (
           <>
             <Hero />

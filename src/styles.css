@@ -280,6 +280,11 @@ section { padding: 84px 0; border-top: 1px solid var(--line); }
 .footer a { color: #b9cdc2; }
 .footer-links { display: flex; gap: 18px; flex-wrap: wrap; }
 
+/* Page introuvable */
+.notfound { border-top: 0; padding: 110px 0 130px; }
+.notfound h1 { font-size: clamp(32px, 5vw, 52px); letter-spacing: -1.4px; margin-bottom: 12px; }
+.notfound .intro { margin-bottom: 32px; }
+
 /* Page Contact */
 .contact-page { border-top: 0; }
 .contact-page .back { display: inline-block; text-decoration: none; font-weight: 600; font-size: 15px; margin-bottom: 28px; }
