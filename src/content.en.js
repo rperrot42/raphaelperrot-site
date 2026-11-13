@@ -281,6 +281,45 @@ const servicesPage = {
       ],
     },
     {
+      titre: 'Mobile application',
+      pour: 'Your customers or your teams need the tool in their pocket.',
+      texte:
+        'I build web applications that install on a phone: the user adds it to their home screen and uses it like any other app, including offline. No App Store, so no fees and no review delays.',
+      exemples: [
+        'Installs straight from the browser',
+        'Works offline',
+        'Notifications',
+        'Camera and location access',
+        'One version for both iPhone and Android',
+      ],
+    },
+    {
+      titre: 'Connecting your software together',
+      pour: 'Your tools do not talk to each other and you bridge the gap by hand.',
+      texte:
+        'Till system, accounting, online store, calendar, quoting software: I connect them so information flows on its own. This is my day job on a platform used by companies.',
+      exemples: [
+        'Sync between till and online store',
+        'Export to your accountant',
+        'Calendar integration',
+        'Data migration from your old system',
+        'Building an API for your partners',
+      ],
+    },
+    {
+      titre: 'Artificial intelligence integration',
+      pour: 'You get too many enquiries, or you keep writing the same replies.',
+      texte:
+        'Automatic sorting of enquiries, pre-filled replies, extracting information from documents, an assistant answering your customers\u2019 common questions. I favour frugal solutions: the lightest model that does the job, not the most expensive one.',
+      exemples: [
+        'Sorting and prioritising incoming enquiries',
+        'Extracting data from PDFs or photos',
+        'Assistant for frequently asked questions',
+        'Assisted writing of your product descriptions',
+        'Model chosen on real running cost',
+      ],
+    },
+    {
       titre: 'Taking over and maintenance',
       pour: 'You already have a site, but it is slow, broken, or nobody looks after it any more.',
       texte:
@@ -294,6 +333,17 @@ const servicesPage = {
       ],
     },
   ],
+  aussi: {
+    titre: 'And also',
+    items: [
+      ['SEO and speed', 'Audit, fixes and monitoring: being found on Google and loading fast.'],
+      ['Accessibility and GDPR', 'Compliance work: contrast, keyboard navigation, legal notice, cookies.'],
+      ['Hosting and backups', 'Setup, domain name, certificate, automatic backups.'],
+      ['Dashboards', 'Your numbers in one place, updating themselves.'],
+      ['Training and support', 'An hour so you can take control of your own tool.'],
+      ['Advice before you start', 'A technical look at your idea, before you spend anything.'],
+    ],
+  },
   stack: {
     titre: 'The technologies I work with',
     texte:

@@ -35,6 +35,20 @@ export default function ServicesPage() {
           ))}
         </div>
 
+        {servicesPage.aussi && (
+          <div className="aussi">
+            <h2>{servicesPage.aussi.titre}</h2>
+            <div className="aussi-grid">
+              {servicesPage.aussi.items.map(([titre, texte]) => (
+                <div className="aussi-item" key={titre}>
+                  <strong>{titre}</strong>
+                  <span>{texte}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
         <div className="stack">
           <h2>{servicesPage.stack.titre}</h2>
           <p className="intro">{servicesPage.stack.texte}</p>

@@ -290,6 +290,45 @@ const servicesPage = {
       ],
     },
     {
+      titre: 'Application mobile',
+      pour: "Vos clients ou vos équipes ont besoin de l'outil dans leur poche.",
+      texte:
+        "Je développe des applications web installables sur téléphone : l'utilisateur l'ajoute à son écran d'accueil et s'en sert comme d'une application classique, y compris hors connexion. Pas de passage par l'App Store, donc pas de frais ni de délais de validation.",
+      exemples: [
+        'Installation directe depuis le navigateur',
+        'Fonctionnement hors connexion',
+        'Notifications',
+        'Accès caméra et géolocalisation',
+        'Une seule version pour iPhone et Android',
+      ],
+    },
+    {
+      titre: 'Connexion entre vos logiciels',
+      pour: 'Vos outils ne se parlent pas et vous faites le lien à la main.',
+      texte:
+        "Caisse, comptabilité, boutique en ligne, agenda, logiciel de devis : je les connecte pour que l'information circule toute seule. C'est mon métier au quotidien sur une plateforme utilisée par des entreprises.",
+      exemples: [
+        'Synchronisation entre caisse et boutique en ligne',
+        'Export vers votre comptable',
+        'Connexion à votre agenda',
+        'Reprise et migration de vos données',
+        "Création d'une API pour vos partenaires",
+      ],
+    },
+    {
+      titre: "Intégration d'intelligence artificielle",
+      pour: "Vous recevez trop de demandes, ou vous rédigez toujours les mêmes réponses.",
+      texte:
+        "Tri automatique des demandes, réponses préremplies, extraction d'informations depuis des documents, assistant qui répond aux questions courantes de vos clients. Je privilégie les solutions sobres : le modèle le plus léger qui fait le travail, pas le plus cher.",
+      exemples: [
+        'Tri et priorisation des demandes entrantes',
+        'Extraction de données depuis des PDF ou des photos',
+        'Assistant de réponse aux questions fréquentes',
+        'Rédaction assistée de vos fiches produits',
+        "Choix du modèle selon le coût réel d'usage",
+      ],
+    },
+    {
       titre: 'Reprise et maintenance',
       pour: "Vous avez déjà un site, mais il est lent, cassé, ou plus personne ne s'en occupe.",
       texte:
@@ -303,6 +342,17 @@ const servicesPage = {
       ],
     },
   ],
+  aussi: {
+    titre: 'Et aussi',
+    items: [
+      ['Référencement et vitesse', "Audit, correction et suivi : être trouvé sur Google et charger vite."],
+      ['Accessibilité et RGPD', "Mise en conformité : contraste, navigation au clavier, mentions légales, cookies."],
+      ['Hébergement et sauvegardes', "Mise en place, nom de domaine, certificat, sauvegardes automatiques."],
+      ['Tableaux de bord', "Vos chiffres au même endroit, mis à jour tout seuls."],
+      ['Formation et accompagnement', "Une heure pour que vous repreniez la main sur votre outil."],
+      ['Conseil avant projet', "Un regard technique sur votre idée, avant de dépenser quoi que ce soit."],
+    ],
+  },
   stack: {
     titre: 'Les technologies que je maîtrise',
     texte:
