@@ -1,30 +1,39 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { contact } from '../shared.js';
-import { useContent } from '../i18n.jsx';
+import { useContent, useLang } from '../i18n.jsx';
+import ContactForm from './ContactForm.jsx';
 
 export default function Contact() {
   const { contactSection } = useContent();
-  const [status, setStatus] = useState('idle'); // idle | sending | sent | error
+  const lang = useLang();
+  const dialogue = useRef(null);
+  const [ouvert, setOuvert] = useState(false);
 
-  async function handleSubmit(e) {
+  const t = lang === 'fr'
+    ? { ecrire: 'Écrivez-moi', appeler: 'Appelez-moi', fermer: 'Fermer',
+        titre: 'Écrivez-moi', sousTitre: 'Je vous réponds sous 24 h ouvrées.',
+        plutot: 'Vous préférez votre messagerie ?' }
+    : { ecrire: 'Write to me', appeler: 'Call me', fermer: 'Close',
+        titre: 'Write to me', sousTitre: 'I reply within one working day.',
+        plutot: 'Prefer your own mail app?' };
+
+  function ouvrir(e) {
+    const d = dialogue.current;
+    // Sans <dialog>, on laisse le lien mailto faire son travail.
+    if (!d || typeof d.showModal !== 'function') return;
     e.preventDefault();
-    const form = e.currentTarget;
-    const data = new FormData(form);
-    if (data.get('_gotcha')) return;
+    d.showModal();
+    setOuvert(true);
+  }
 
-    setStatus('sending');
-    try {
-      const res = await fetch(contact.formEndpoint, {
-        method: 'POST',
-        body: data,
-        headers: { Accept: 'application/json' },
-      });
-      if (!res.ok) throw new Error('Envoi refusé');
-      form.reset();
-      setStatus('sent');
-    } catch {
-      setStatus('error');
-    }
+  function fermer() {
+    dialogue.current?.close();
+    setOuvert(false);
+  }
+
+  // Clic en dehors du contenu : le <dialog> reçoit l'événement lui-même.
+  function clicFond(e) {
+    if (e.target === dialogue.current) fermer();
   }
 
   return (
@@ -35,14 +44,16 @@ export default function Contact() {
         <p className="intro">{contactSection.intro}</p>
 
         <div className="contact-grid">
-          {/* Colonne de gauche : rassurer avant de demander quoi que ce soit */}
           <div className="contact-aside">
             <a className="contact-direct" href={contact.phoneLink}>
-              <span className="label">Appelez-moi</span>
+              <span className="label">{t.appeler}</span>
               <strong>{contact.phone}</strong>
             </a>
-            <a className="contact-direct" href={`mailto:${contact.email}`}>
-              <span className="label">Écrivez-moi</span>
+
+            {/* Reste un lien mailto : si le navigateur ne gère pas <dialog>,
+                le comportement d'origine est conservé. */}
+            <a className="contact-direct" href={`mailto:${contact.email}`} onClick={ouvrir}>
+              <span className="label">{t.ecrire}</span>
               <strong>{contact.email}</strong>
             </a>
 
@@ -61,7 +72,7 @@ export default function Contact() {
             </ul>
 
             <div className="steps-next">
-              <div className="label">Ce qui se passe ensuite</div>
+              <div className="label">{contactSection.etapes && (lang === 'fr' ? 'Ce qui se passe ensuite' : 'What happens next')}</div>
               <ol>
                 {contactSection.etapes.map((e) => <li key={e}>{e}</li>)}
               </ol>
@@ -89,76 +100,29 @@ export default function Contact() {
             </div>
           </div>
 
-          {/* Colonne de droite : le formulaire */}
           <div className="contact-form-card">
-            {status === 'sent' ? (
-              <div className="form-done" role="status">
-                <svg viewBox="0 0 24 24" width="44" height="44" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                  <circle cx="12" cy="12" r="10" />
-                  <path d="M8 12.5l2.5 2.5L16 9.5" />
-                </svg>
-                <h3>Message envoyé</h3>
-                <p>Merci. Je vous réponds sous 24 h ouvrées.</p>
-                <p className="small">
-                  Besoin d'une réponse plus rapide ? Appelez-moi au{' '}
-                  <a href={contact.phoneLink}>{contact.phone}</a>.
-                </p>
-              </div>
-            ) : (
-              <form className="form" onSubmit={handleSubmit}>
-                <div className="form-row">
-                  <div className="field">
-                    <label htmlFor="name">Votre nom</label>
-                    <input id="name" name="name" type="text" required autoComplete="name" />
-                  </div>
-                  <div className="field">
-                    <label htmlFor="email">Votre e-mail</label>
-                    <input id="email" name="email" type="email" required autoComplete="email" />
-                  </div>
-                </div>
-
-                <div className="field">
-                  <label htmlFor="phone">
-                    Votre téléphone <span className="optional">(facultatif)</span>
-                  </label>
-                  <input id="phone" name="phone" type="tel" autoComplete="tel" />
-                </div>
-
-                <div className="field">
-                  <label htmlFor="message">Votre projet, en quelques lignes</label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    rows="6"
-                    required
-                    placeholder="Par exemple : je vends mes produits sur les marchés et j'aimerais pouvoir les proposer en ligne."
-                  />
-                </div>
-
-                <input type="text" name="_gotcha" tabIndex="-1" autoComplete="off" aria-hidden="true" className="gotcha" />
-
-                <button className="btn btn-primary btn-block" type="submit" disabled={status === 'sending'}>
-                  {status === 'sending' ? 'Envoi en cours…' : 'Envoyer ma demande'}
-                </button>
-
-                <p className="form-status" role="status" aria-live="polite">
-                  {status === 'error' && (
-                    <>
-                      L'envoi a échoué. Appelez-moi au <a href={contact.phoneLink}>{contact.phone}</a> ou
-                      écrivez à <a href={`mailto:${contact.email}`}>{contact.email}</a>.
-                    </>
-                  )}
-                </p>
-
-                <p className="form-legal">
-                  Vos coordonnées servent uniquement à vous répondre. Ni revendues, ni utilisées pour de
-                  la prospection. <a href="/mentions-legales">En savoir plus</a>.
-                </p>
-              </form>
-            )}
+            <ContactForm idPrefix="inline" />
           </div>
         </div>
       </div>
+
+      {/* Fenêtre ouverte depuis « Écrivez-moi » : le formulaire inline est loin
+          sur téléphone, et le mailto ne fonctionne pas sans client de messagerie. */}
+      <dialog className="modale" ref={dialogue} onClick={clicFond} onClose={() => setOuvert(false)}>
+        <div className="modale-contenu">
+          <button className="modale-fermer" type="button" onClick={fermer} aria-label={t.fermer}>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+              <path d="M6 6l12 12M18 6L6 18" />
+            </svg>
+          </button>
+          <h3 className="modale-titre">{t.titre}</h3>
+          <p className="modale-sous-titre">{t.sousTitre}</p>
+          {ouvert && <ContactForm idPrefix="modale" />}
+          <p className="modale-alt">
+            {t.plutot} <a href={`mailto:${contact.email}`}>{contact.email}</a>
+          </p>
+        </div>
+      </dialog>
     </section>
   );
 }
