@@ -2,6 +2,20 @@
   "name": "raphaelperrot-site",
   "private": true,
   "version": "1.0.0",
+  "description": "Site vitrine de Raphaël Perrot, développeur freelance à Toulouse.",
+  "author": {
+    "name": "Raphaël Perrot",
+    "url": "https://github.com/rperrot42"
+  },
+  "homepage": "https://raphaelperrot.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rperrot42/raphaelperrot-site.git"
+  },
+  "bugs": {
+    "url": "https://github.com/rperrot42/raphaelperrot-site/issues"
+  },
+  "license": "UNLICENSED",
   "type": "module",
   "scripts": {
     "dev": "vite",

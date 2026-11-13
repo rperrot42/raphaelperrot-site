@@ -1,6 +1,9 @@
 # raphaelperrot.com
 
-Site vitrine de Raphaël Perrot, développeur freelance. React 18 + Vite, sans dépendance superflue.
+Site vitrine de Raphaël Perrot, développeur freelance à Toulouse. React 18 + Vite, sans dépendance superflue.
+
+**En ligne :** [raphaelperrot.com](https://raphaelperrot.com) · [version anglaise](https://raphaelperrot.com/en)
+**Auteur :** Raphaël Perrot — [GitHub](https://github.com/rperrot42) · [LinkedIn](https://www.linkedin.com/in/rapha%C3%ABl-perrot-104762290)
 
 ## Lancer en local
 
