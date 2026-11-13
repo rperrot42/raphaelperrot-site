@@ -43,12 +43,20 @@ const services = [
 const projects = [
   {
     title: 'Valentine Lacroix, lawyer',
-    sub: 'Brochure site · since 2024',
+    sub: 'Brochure site · corporate law · since 2024',
     problem:
-      'A lawyer opening her own practice with no online presence: prospective clients searched for her on Google and found nothing.',
-    done: 'A clear site presenting her areas of practice, with contact two clicks away, working as well on a phone as on a desktop.',
-    tags: ['Brochure site', 'Local SEO', 'Mobile'],
+      'A lawyer opening her own practice with no online presence. Her clients — company directors and investors — research before they call: without a site, she did not exist at that moment.',
+    done:
+      'A site that establishes her authority from the first second: clear positioning on corporate law and insolvency proceedings, her areas of practice, published fees, and appointment booking reachable from any page.',
+    tags: ['Brochure site', 'Appointment booking', 'Local SEO', 'Mobile'],
     url: 'https://valentine-lacroix-avocat.fr/',
+    image: {
+      base: '/photos/projet-lacroix',
+      largeurs: [500, 800, 1100],
+      width: 1100,
+      height: 690,
+      alt: 'Home page of the website of Valentine Lacroix, corporate lawyer.',
+    },
   },
 ];
 

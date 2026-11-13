@@ -135,7 +135,12 @@ section { padding: 84px 0; border-top: 1px solid var(--line); }
 
 /* Réalisations */
 .projects { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); gap: 20px; }
-.project { padding: 30px; }
+.project { padding: 0; overflow: hidden; }
+.project > h3, .project > .sub, .project > .project-block, .project > .tags, .project > .link { margin-left: 30px; margin-right: 30px; }
+.project > h3 { margin-top: 26px; }
+.project > .link { display: inline-block; margin-bottom: 30px; }
+.project-shot { display: block; border-bottom: 1px solid var(--line); background: var(--bg); }
+.project-shot img { display: block; width: 100%; height: auto; }
 .project .sub { color: var(--muted); font-size: 15px; margin-bottom: 20px; }
 .project-block { margin-bottom: 18px; }
 .project-block .label {

@@ -46,12 +46,20 @@ const services = [
 const projects = [
   {
     title: 'Valentine Lacroix, avocate',
-    sub: 'Site vitrine · depuis 2024',
+    sub: "Site vitrine · droit des sociétés · depuis 2024",
     problem:
-      "Une avocate qui démarre son cabinet et n'existait pas en ligne : ses futurs clients la cherchaient sur Google sans la trouver.",
-    done: "Un site clair qui présente ses domaines d'intervention et permet de la contacter en deux clics, consultable depuis un téléphone comme depuis un ordinateur.",
-    tags: ['Site vitrine', 'Référencement local', 'Mobile'],
+      "Une avocate qui ouvre son cabinet et n'existe pas en ligne. Sa clientèle — dirigeants d'entreprise, investisseurs — se renseigne avant d'appeler : sans site, elle n'existait pas à ce moment-là.",
+    done:
+      "Un site qui installe son autorité dès la première seconde : positionnement clair sur le droit des sociétés et les procédures collectives, présentation de ses expertises, honoraires annoncés, et prise de rendez-vous accessible depuis n'importe quelle page.",
+    tags: ['Site vitrine', 'Prise de rendez-vous', 'Référencement local', 'Mobile'],
     url: 'https://valentine-lacroix-avocat.fr/',
+    image: {
+      base: '/photos/projet-lacroix',
+      largeurs: [500, 800, 1100],
+      width: 1100,
+      height: 690,
+      alt: "Page d'accueil du site de Maître Valentine Lacroix, avocate en droit des sociétés.",
+    },
   },
 ];
 

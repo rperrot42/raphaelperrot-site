@@ -13,6 +13,27 @@ export default function Work() {
       <div className="projects">
         {projects.map((p) => (
           <article className="card project" key={p.title}>
+            {p.image && (
+              <a className="project-shot" href={p.url} target="_blank" rel="noopener noreferrer" tabIndex={-1} aria-hidden="true">
+                <picture>
+                  <source
+                    type="image/webp"
+                    srcSet={p.image.largeurs.map((w) => `${p.image.base}-${w}.webp ${w}w`).join(', ')}
+                    sizes="(max-width: 760px) 100vw, 560px"
+                  />
+                  <img
+                    src={`${p.image.base}-800.jpg`}
+                    srcSet={p.image.largeurs.map((w) => `${p.image.base}-${w}.jpg ${w}w`).join(', ')}
+                    sizes="(max-width: 760px) 100vw, 560px"
+                    width={p.image.width}
+                    height={p.image.height}
+                    alt={p.image.alt}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </picture>
+              </a>
+            )}
             <h3>{p.title}</h3>
             <div className="sub">{p.sub}</div>
 
