@@ -149,7 +149,7 @@ export const legal = {
   vat: "TVA non applicable, article 293 B du Code général des impôts.",
   host: {
     name: 'OVH SAS',
-    address: '2 rue Kellermann, 59100 Roubaix, France — 1007',
+    address: '2 rue Kellermann, 59100 Roubaix, France — tél. 1007',
     url: 'https://www.ovhcloud.com',
   },
 };
