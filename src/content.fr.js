@@ -167,7 +167,7 @@ const sport = {
       width: 1200,
       height: 900,
       alt: "Vélo de route Alpha Aero SL : cadre carbone bleu nuit, roues à profil haut, posé dans l'herbe au bord d'une route.",
-      legende: 'Mon vélo de route, un Alpha Aero SL.',
+      legende: "Mon vélo de route, un Alpha Aero SL. Et oui, c'est une bouteille d'eau dans le porte-bidon : je venais de l'acheter et je n'avais pas encore de gourde. Les puristes m'ont pardonné depuis.",
     },
   ],
   cards: [

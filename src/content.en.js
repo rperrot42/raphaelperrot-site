@@ -159,7 +159,7 @@ const sport = {
       width: 1200,
       height: 900,
       alt: 'An Alpha Aero SL road bike: midnight blue carbon frame and deep section wheels, resting on the grass by a road.',
-      legende: 'My road bike, an Alpha Aero SL.',
+      legende: 'My road bike, an Alpha Aero SL. And yes, that is a supermarket water bottle in the cage: I had just bought the bike and had no bidon yet. The purists have forgiven me since.',
     },
   ],
   cards: [
