@@ -11,7 +11,7 @@ export default function Header({ home = true }) {
       <a className="skip" href="#main">Aller au contenu</a>
       <div className="wrap header-inner">
         <a className="brand" href={home ? '#top' : '/'} onClick={() => setOpen(false)}>
-          <Logo />
+          <Logo size={46} />
           <strong>Raphaël Perrot</strong>
         </a>
         <button
@@ -27,11 +27,16 @@ export default function Header({ home = true }) {
           </svg>
         </button>
         <nav id="main-nav" className={open ? 'nav open' : 'nav'} aria-label="Navigation principale">
-          {nav.map((item) => (
-            <a key={item.id} href={`${prefix}#${item.id}`} onClick={() => setOpen(false)}>
-              {item.label}
-            </a>
-          ))}
+          {nav
+            .filter((item) => item.id !== 'contact')
+            .map((item) => (
+              <a key={item.id} href={`${prefix}#${item.id}`} onClick={() => setOpen(false)}>
+                {item.label}
+              </a>
+            ))}
+          <a className="nav-cta" href={`${prefix}#contact`} onClick={() => setOpen(false)}>
+            Me contacter
+          </a>
         </nav>
       </div>
     </header>
