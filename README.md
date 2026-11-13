@@ -48,8 +48,52 @@ Coller l'identifiant YouTube (la partie après `v=`) dans `sport.youtubeId`.
 Les couleurs de `src/styles.css` respectent le contraste WCAG AA (4.5:1 minimum sur le texte).
 Si tu modifies `--green` ou `--accent`, vérifie le contraste avant de publier.
 
-## Mettre en ligne (Vercel)
+## Mettre en ligne (OVH mutualisé)
 
-1. Pousser le projet sur GitHub.
-2. Sur vercel.com : Add New → Project → importer le dépôt. Vercel détecte Vite tout seul (build `npm run build`, dossier `dist`).
-3. Settings → Domains → ajouter `raphaelperrot.com`, puis créer chez OVH les enregistrements DNS indiqués par Vercel (sans toucher aux lignes MX du mail).
+Le site est statique : il n'y a ni PHP ni base de données à configurer.
+
+### Une fois pour toutes
+
+1. Installer l'outil de transfert : `brew install lftp`
+2. Récupérer les identifiants FTP dans l'espace client OVH :
+   **Hébergements → ton hébergement → onglet « FTP - SSH »**
+3. `cp deploy/.env.example deploy/.env` puis renseigner `OVH_HOST`, `OVH_USER`, `OVH_PASSWORD`.
+   `deploy/.env` est ignoré par git : les identifiants ne partent jamais sur GitHub.
+
+### À chaque mise à jour
+
+```bash
+./deploy/deploy.sh
+```
+
+Le script construit le site et synchronise `dist/` avec `www/` sur le serveur.
+`--delete` supprime côté serveur les fichiers qui n'existent plus en local : le serveur
+reflète donc exactement `dist/`, sans résidus d'anciennes versions.
+
+### Le domaine
+
+Dans l'espace client OVH : **Hébergements → Multisite → Ajouter un domaine**,
+pointer `raphaelperrot.com` sur le dossier `www`. Le certificat SSL (Let's Encrypt)
+est fourni par OVH et peut mettre quelques heures à s'activer.
+
+Une fois `https://raphaelperrot.com` vérifié, décommenter la ligne
+`Strict-Transport-Security` dans `public/.htaccess`, puis redéployer.
+
+### Ce que fait `public/.htaccess`
+
+Vite le recopie tel quel dans `dist/`. Il gère :
+
+- la redirection HTTP → HTTPS et `www` → domaine nu ;
+- la réécriture des URL, **indispensable** pour que `/mentions-legales` fonctionne
+  en accès direct (sans elle, Apache renvoie une 404) ;
+- les en-têtes de sécurité ;
+- le cache long sur les polices et les fichiers versionnés, et l'absence de cache
+  sur `index.html` — sinon une mise en ligne continue de servir l'ancienne version.
+
+### Vérifier après déploiement
+
+```bash
+curl -I https://raphaelperrot.com/                   # 200
+curl -I https://raphaelperrot.com/mentions-legales   # 200, pas 404
+curl -I https://www.raphaelperrot.com/               # 301 vers le domaine nu
+```
