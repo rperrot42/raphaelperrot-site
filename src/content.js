@@ -104,8 +104,10 @@ export const experience = [
     title: 'Développeur Java / Spring Boot — Wandeed',
     sub: 'Teamber, plateforme ERP/CRM SaaS B2B',
     points: [
-      'Développement back-end en Java et Spring Boot sur une architecture microservices.',
-      'Déploiement et diagnostic sur Kubernetes, pipelines Jenkins.',
+      "Refonte de l'affichage Gantt d'un agenda : visualisation des fonctionnalités sur un planning.",
+      'Développement du déplacement des tâches dans le Gantt.',
+      'Conception et développement du microservice de gestion des groupes.',
+      'Back-end Java et Spring Boot sur une architecture microservices, déployé sur Kubernetes.',
       'Modélisation des données avec JPA et PostgreSQL, approche DDD.',
     ],
     tags: ['Java', 'Spring Boot', 'Kubernetes', 'PostgreSQL', 'Jenkins', 'Microservices'],
@@ -194,6 +196,16 @@ export const about = {
     "J'aime voyager, voir d'autres endroits et d'autres façons de faire. Je n'ai pas envie de passer ma vie derrière un écran — et je crois que ça me rend meilleur devant : on a de meilleures idées quand on regarde ailleurs.",
     "Je n'oublie pas la chance que j'ai. Je préfère réussir avec les gens plutôt qu'à leurs dépens, et c'est pour ça que je travaille avec des petites structures : on se parle directement, sans intermédiaire, et je m'implique vraiment dans ce que vous construisez.",
   ],
+};
+
+// Portrait affiché dans la section « Qui je suis ».
+export const portrait = {
+  base: '/photos/portrait',
+  largeurs: [400, 600, 800],
+  width: 800,
+  height: 1066,
+  alt: "Raphaël Perrot devant le canyon Matka, en Macédoine du Nord.",
+  legende: 'Canyon Matka, Macédoine du Nord.',
 };
 
 export const contactSection = {

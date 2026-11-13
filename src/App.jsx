@@ -10,13 +10,15 @@ import Contact from './components/Contact.jsx';
 import Footer from './components/Footer.jsx';
 import Legal from './pages/Legal.jsx';
 
-function isLegalRoute() {
-  if (typeof window === 'undefined') return false;
-  return window.location.pathname.replace(/\/+$/, '') === '/mentions-legales';
+function isLegalRoute(route) {
+  const path =
+    route ?? (typeof window === 'undefined' ? '/' : window.location.pathname);
+  return path.replace(/\/+$/, '') === '/mentions-legales';
 }
 
-export default function App() {
-  const legal = isLegalRoute();
+// `route` est fourni au pré-rendu ; dans le navigateur on lit l'URL courante.
+export default function App({ route }) {
+  const legal = isLegalRoute(route);
 
   return (
     <>

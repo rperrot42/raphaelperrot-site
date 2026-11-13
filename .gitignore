@@ -10,3 +10,4 @@ deploy/.env
 
 # Photos sources (lourdes, non publiées)
 sources/
+dist-ssr
