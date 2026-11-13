@@ -19,10 +19,9 @@ export const contact = {
   siret: '985 308 931 00015',
   address: '232 route de Saint-Sulpice, 31410 Mauzac',
 
-  // Pour activer le formulaire de contact : crée un formulaire gratuit sur
-  // https://formspree.io et colle ici l'URL fournie (ex. https://formspree.io/f/xxxxxxx).
-  // Tant que ce champ est vide, seuls les boutons e-mail et téléphone s'affichent.
-  formEndpoint: '',
+  // Le formulaire est traité par public/contact.php, hébergé chez OVH.
+  // Aucun service tiers, aucun compte à créer.
+  formEndpoint: '/contact.php',
 };
 
 export const nav = [
@@ -142,7 +141,7 @@ export const experience = [
 export const sport = {
   title: 'Le vélo, depuis plus de dix ans',
   text:
-    "Le sport m'a appris la régularité et à tenir un objectif dans la durée. J'aborde les projets de mes clients de la même façon.",
+    "Je travaille beaucoup, et c'est le sport qui m'a appris à le faire dans la durée : on ne progresse pas en forçant un jour sur deux, mais en répétant sans sauter de séance. Je m'entraîne toute l'année, accompagné par un coach, avec des objectifs fixés plusieurs mois à l'avance. J'aborde les projets de mes clients de la même façon : une échéance claire, des étapes régulières, et rien qui se joue à la dernière minute.",
   // Pour ajouter une vidéo VTT : colle ici l'identifiant YouTube (la partie après « v= »).
   youtubeId: '',
   cards: [
@@ -152,7 +151,11 @@ export const sport = {
     },
     {
       title: 'Triathlon',
-      lines: ["Triathlon d'Embrun, format M, en 2026.", 'Semi-marathon en 1h36.'],
+      lines: [
+        "Triathlon d'Embrun, format M, en 2026.",
+        'Semi-marathon en 1h36.',
+        'Entraînement encadré par Pierre Dreneau.',
+      ],
     },
     {
       title: 'Endurance',
