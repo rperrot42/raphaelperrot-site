@@ -1,15 +1,19 @@
 name: Build et deploy OVH
 
+# L'hébergement gratuit OVH n'a pas l'intégration Git : on compile ici
+# puis on envoie dist/ dans www/ par FTPS (même logique que deploy/deploy.sh).
+
 on:
   push:
     branches: [main]
   workflow_dispatch:
 
-permissions:
-  contents: write
+concurrency:
+  group: deploy-ovh
+  cancel-in-progress: false
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -19,10 +23,24 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
-      # Pousse le site compilé (dist) sur la branche "deploy", que l'hébergement OVH suit
-      - uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
-          publish_branch: deploy
-          force_orphan: true
+      - name: Vérifier la présence du .htaccess
+        run: test -f dist/.htaccess
+      - name: Envoi sur l'hébergement OVH (FTPS)
+        env:
+          OVH_HOST: ftp.cluster129.hosting.ovh.net
+          OVH_USER: raphaqm
+          LFTP_PASSWORD: ${{ secrets.OVH_FTP_PASSWORD }}
+        run: |
+          if [ -z "$LFTP_PASSWORD" ]; then
+            echo "::error::Secret OVH_FTP_PASSWORD manquant (Settings → Secrets and variables → Actions)"
+            exit 1
+          fi
+          sudo apt-get update -qq && sudo apt-get install -y -qq lftp
+          lftp --env-password -u "$OVH_USER" "ftps://$OVH_HOST" -e "
+            set ftp:ssl-force true;
+            set ftp:ssl-protect-data true;
+            set ssl:verify-certificate true;
+            set net:max-retries 3;
+            set net:timeout 15;
+            mirror --reverse --delete --verbose --parallel=4 --exclude-glob .DS_Store dist/ /www;
+            bye"
