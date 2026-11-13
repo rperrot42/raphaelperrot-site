@@ -12,10 +12,9 @@ export const contact = {
   phone: '07 69 27 60 73',
   phoneLink: 'tel:+33769276073',
 
-  // ⚠️ À COMPLÉTER : colle l'URL complète de ton profil LinkedIn
-  // (ex. https://www.linkedin.com/in/ton-identifiant/).
-  // Tant que c'est vide, le bouton LinkedIn ne s'affiche pas.
-  linkedin: '',
+  // L'accent est volontairement encodé (%C3%AB = « ë ») : c'est la forme
+  // valide dans une URL, qui fonctionne partout.
+  linkedin: 'https://www.linkedin.com/in/rapha%C3%ABl-perrot-104762290',
 
   siret: '985 308 931 00015',
   address: '232 route de Saint-Sulpice, 31410 Mauzac',
