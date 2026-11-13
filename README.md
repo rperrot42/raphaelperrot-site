@@ -53,3 +53,8 @@ Si tu modifies `--green` ou `--accent`, vérifie le contraste avant de publier.
 1. Pousser le projet sur GitHub.
 2. Sur vercel.com : Add New → Project → importer le dépôt. Vercel détecte Vite tout seul (build `npm run build`, dossier `dist`).
 3. Settings → Domains → ajouter `raphaelperrot.com`, puis créer chez OVH les enregistrements DNS indiqués par Vercel (sans toucher aux lignes MX du mail).
+
+## Hébergement OVH (via GitHub)
+
+À chaque push sur `main`, la GitHub Action `.github/workflows/deploy.yml` compile le site et pousse `dist` sur la branche `deploy`. L'hébergement OVH (site `www`) suit cette branche via son intégration Git + webhook.
+`public/.htaccess` reprend sur Apache ce que fait `vercel.json` (route `/mentions-legales`, en-têtes de sécurité, cache des polices) et redirige vers `https://raphaelperrot.com`.
