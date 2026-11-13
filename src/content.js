@@ -164,6 +164,16 @@ export const sport = {
   ],
 };
 
+export const about = {
+  eyebrow: 'Qui je suis',
+  title: 'Ce que je mets dans un projet',
+  paragraphs: [
+    "Je donne tout à ce que j'entreprends, c'est la seule façon de travailler que je connaisse. Ma plus grande satisfaction n'est pas de réussir facilement : c'est d'atteindre un objectif pour lequel je me suis donné à fond.",
+    "J'aime la compétition et l'intensité — le VTT en Coupe de France, le triathlon, le pilotage en Formule 4. Ce goût de l'engagement total, je le mets au service de mes clients : quand je prends un projet, je le prends entièrement.",
+    "Et je n'oublie pas d'où je viens. J'ai de la chance, et je préfère réussir avec les gens plutôt qu'à leurs dépens. C'est pour ça que je travaille avec des petites structures : on se parle directement, sans intermédiaire, et je m'implique vraiment dans ce que vous construisez.",
+  ],
+};
+
 export const legal = {
   activity: 'Développement de sites internet et de logiciels',
   registered: '21 février 2024',

@@ -5,6 +5,7 @@ import Work from './components/Work.jsx';
 import Method from './components/Method.jsx';
 import Experience from './components/Experience.jsx';
 import Sport from './components/Sport.jsx';
+import About from './components/About.jsx';
 import Contact from './components/Contact.jsx';
 import Footer from './components/Footer.jsx';
 import Legal from './pages/Legal.jsx';
@@ -31,6 +32,7 @@ export default function App() {
             <Method />
             <Experience />
             <Sport />
+            <About />
             <Contact />
           </>
         )}
