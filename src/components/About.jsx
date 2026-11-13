@@ -1,7 +1,8 @@
 import Section from './Section.jsx';
-import { about, portrait } from '../content.js';
+import { useContent } from '../i18n.jsx';
 
 export default function About() {
+  const { about, portrait } = useContent();
   const srcSet = (ext) =>
     portrait.largeurs.map((w) => `${portrait.base}-${w}.${ext} ${w}w`).join(', ');
 

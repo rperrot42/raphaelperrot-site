@@ -1,6 +1,6 @@
 export default function Section({ id, eyebrow, title, intro, className = '', children }) {
   return (
-    <section id={id} className={className}>
+    <section id={id} className={className} data-reveal>
       <div className="wrap">
         {eyebrow && <div className="eyebrow">{eyebrow}</div>}
         {title && <h2>{title}</h2>}

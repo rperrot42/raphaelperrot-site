@@ -1,8 +1,9 @@
-import { hero } from '../content.js';
+import { useContent } from '../i18n.jsx';
 
 export default function Hero() {
+  const { hero } = useContent();
   return (
-    <section className="hero" id="top">
+    <section className="hero" id="top" data-reveal>
       <div className="wrap">
         <div className="eyebrow">{hero.eyebrow}</div>
         <h1>

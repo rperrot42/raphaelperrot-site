@@ -1,4 +1,4 @@
-import { contact } from '../content.js';
+import { contact } from '../shared.js';
 
 export default function Footer() {
   return (

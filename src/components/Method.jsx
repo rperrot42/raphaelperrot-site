@@ -1,7 +1,8 @@
 import Section from './Section.jsx';
-import { method } from '../content.js';
+import { useContent } from '../i18n.jsx';
 
 export default function Method() {
+  const { method } = useContent();
   return (
     <Section id="methode" eyebrow="Méthode" title="Comment je travaille avec vous">
       <ol className="grid steps">

@@ -1,7 +1,9 @@
 import { useState } from 'react';
-import { contact, contactSection } from '../content.js';
+import { contact } from '../shared.js';
+import { useContent } from '../i18n.jsx';
 
 export default function Contact() {
+  const { contactSection } = useContent();
   const [status, setStatus] = useState('idle'); // idle | sending | sent | error
 
   async function handleSubmit(e) {
@@ -26,7 +28,7 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" className="contact">
+    <section id="contact" className="contact" data-reveal>
       <div className="wrap">
         <div className="eyebrow">{contactSection.eyebrow}</div>
         <h2>{contactSection.title}</h2>

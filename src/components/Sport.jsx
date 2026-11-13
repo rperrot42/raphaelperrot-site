@@ -1,5 +1,5 @@
 import Section from './Section.jsx';
-import { sport } from '../content.js';
+import { useContent } from '../i18n.jsx';
 
 function Photo({ photo }) {
   const srcSet = (ext) =>
@@ -8,11 +8,11 @@ function Photo({ photo }) {
   return (
     <figure className="sport-photo">
       <picture>
-        <source type="image/webp" srcSet={srcSet('webp')} sizes="(max-width: 860px) 100vw, 820px" />
+        <source type="image/webp" srcSet={srcSet('webp')} sizes="(max-width: 900px) 100vw, 620px" />
         <img
           src={`${photo.base}-1200.jpg`}
           srcSet={srcSet('jpg')}
-          sizes="(max-width: 860px) 100vw, 820px"
+          sizes="(max-width: 900px) 100vw, 620px"
           width={photo.width}
           height={photo.height}
           alt={photo.alt}
@@ -26,9 +26,9 @@ function Photo({ photo }) {
 }
 
 export default function Sport() {
+  const { sport } = useContent();
   return (
     <Section id="sport" eyebrow="En dehors du code" title={sport.title} intro={sport.text}>
-      {sport.photo && <Photo photo={sport.photo} />}
 
       {sport.youtubeId && (
         <div className="video">
@@ -42,15 +42,18 @@ export default function Sport() {
         </div>
       )}
 
-      <div className="grid">
-        {sport.cards.map((c) => (
-          <article className="card" key={c.title}>
-            <h3>{c.title}</h3>
-            {c.lines.map((l) => (
-              <p key={l}>{l}</p>
-            ))}
-          </article>
-        ))}
+      <div className="sport-grid">
+        {sport.photo && <Photo photo={sport.photo} />}
+        <div className="sport-cards">
+          {sport.cards.map((c) => (
+            <article className="card" key={c.title}>
+              <h3>{c.title}</h3>
+              {c.lines.map((l) => (
+                <p key={l}>{l}</p>
+              ))}
+            </article>
+          ))}
+        </div>
       </div>
     </Section>
   );

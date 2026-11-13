@@ -1,7 +1,8 @@
 import Section from './Section.jsx';
-import { projects } from '../content.js';
+import { useContent } from '../i18n.jsx';
 
 export default function Work() {
+  const { projects } = useContent();
   return (
     <Section
       id="realisations"

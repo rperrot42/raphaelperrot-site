@@ -9,19 +9,17 @@ import About from './components/About.jsx';
 import Contact from './components/Contact.jsx';
 import Footer from './components/Footer.jsx';
 import Legal from './pages/Legal.jsx';
-
-function isLegalRoute(route) {
-  const path =
-    route ?? (typeof window === 'undefined' ? '/' : window.location.pathname);
-  return path.replace(/\/+$/, '') === '/mentions-legales';
-}
+import { LangContext, langFromPath, isLegalPath } from './i18n.jsx';
 
 // `route` est fourni au pré-rendu ; dans le navigateur on lit l'URL courante.
 export default function App({ route }) {
-  const legal = isLegalRoute(route);
+  const path =
+    route ?? (typeof window === 'undefined' ? '/' : window.location.pathname);
+  const lang = langFromPath(path);
+  const legal = isLegalPath(path);
 
   return (
-    <>
+    <LangContext.Provider value={lang}>
       <Header home={!legal} />
       <main id="main">
         {legal ? (
@@ -40,6 +38,6 @@ export default function App({ route }) {
         )}
       </main>
       <Footer />
-    </>
+    </LangContext.Provider>
   );
 }

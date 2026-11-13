@@ -1,7 +1,8 @@
 import Section from './Section.jsx';
-import { experience } from '../content.js';
+import { useContent } from '../i18n.jsx';
 
 export default function Experience() {
+  const { experience } = useContent();
   return (
     <Section id="experience" eyebrow="Parcours" title="D'où je viens">
       {experience.map((job) => (

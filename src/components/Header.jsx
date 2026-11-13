@@ -1,16 +1,22 @@
 import { useState } from 'react';
 import Logo from './Logo.jsx';
-import { nav } from '../content.js';
+import { useContent, useLang, langues } from '../i18n.jsx';
 
 export default function Header({ home = true }) {
+  const { nav } = useContent();
+  const lang = useLang();
+  const courante = langues.find((l) => l.code === lang);
+  const autre = langues.find((l) => l.code !== lang);
   const [open, setOpen] = useState(false);
-  const prefix = home ? '' : '/';
+  // Depuis les mentions légales, les ancres doivent repartir de l'accueil
+  // de la langue courante.
+  const prefix = home ? '' : courante.racine;
 
   return (
     <header className="header">
       <a className="skip" href="#main">Aller au contenu</a>
       <div className="wrap header-inner">
-        <a className="brand" href={home ? '#top' : '/'} onClick={() => setOpen(false)}>
+        <a className="brand" href={home ? '#top' : courante.racine} onClick={() => setOpen(false)}>
           <Logo size={46} />
           <strong>Raphaël Perrot</strong>
         </a>
@@ -35,7 +41,11 @@ export default function Header({ home = true }) {
               </a>
             ))}
           <a className="nav-cta" href={`${prefix}#contact`} onClick={() => setOpen(false)}>
-            Me contacter
+            {lang === 'fr' ? 'Me contacter' : 'Get in touch'}
+          </a>
+          <a className="nav-lang" href={autre.racine} hrefLang={autre.code} lang={autre.code}>
+            {autre.label}
+            <span className="sr-only"> — {autre.nom}</span>
           </a>
         </nav>
       </div>

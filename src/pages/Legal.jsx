@@ -1,5 +1,5 @@
-import { useEffect } from 'react';
-import { contact, legal, site } from '../content.js';
+import { contact } from '../shared.js';
+import { useContent } from '../i18n.jsx';
 
 function Line({ label, children }) {
   return (
@@ -10,14 +10,7 @@ function Line({ label, children }) {
 }
 
 export default function Legal() {
-  useEffect(() => {
-    document.title = 'Mentions légales — Raphaël Perrot';
-    document
-      .querySelector('meta[name="description"]')
-      ?.setAttribute('content', 'Mentions légales du site raphaelperrot.com : éditeur, hébergeur, propriété intellectuelle et traitement des données personnelles.');
-    document.querySelector('link[rel="canonical"]')?.setAttribute('href', `${site.url}/mentions-legales`);
-  }, []);
-
+  const { legal, site } = useContent();
   return (
     <section className="legal">
       <div className="wrap">

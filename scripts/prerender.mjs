@@ -1,34 +1,74 @@
-// Pré-génère le HTML de chaque page au moment de la compilation.
+// Pré-génère le HTML de chaque page, dans chaque langue, à la compilation.
 //
 // Sans ça, le HTML servi ne contient que <div id="root"></div> : aucun texte
 // pour les moteurs de recherche, qui doivent exécuter le JavaScript avant de
-// voir quoi que ce soit. Avec ça, le contenu est lisible immédiatement.
+// voir quoi que ce soit.
 
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-// fileURLToPath plutôt que import.meta.dirname, absent avant Node 20.11
 const racine = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const { render } = await import(resolve(racine, 'dist-ssr/entry-server.js'));
+const fr = (await import(resolve(racine, 'src/content.fr.js'))).default;
+const en = (await import(resolve(racine, 'src/content.en.js'))).default;
+
+const SITE = 'https://raphaelperrot.com';
 
 const pages = [
-  { route: '/', fichier: 'dist/index.html' },
-  { route: '/mentions-legales', fichier: 'dist/mentions-legales/index.html' },
+  {
+    route: '/', lang: 'fr', fichier: 'dist/index.html', url: `${SITE}/`,
+    titre: fr.site.title, description: fr.site.description, alt: `${SITE}/en`,
+  },
+  {
+    route: '/mentions-legales', lang: 'fr', fichier: 'dist/mentions-legales/index.html',
+    url: `${SITE}/mentions-legales`,
+    titre: 'Mentions légales — Raphaël Perrot',
+    description: "Mentions légales du site raphaelperrot.com : éditeur, hébergeur, propriété intellectuelle et traitement des données personnelles.",
+    alt: `${SITE}/en/legal-notice`,
+  },
+  {
+    route: '/en', lang: 'en', fichier: 'dist/en/index.html', url: `${SITE}/en`,
+    titre: en.site.title, description: en.site.description, alt: `${SITE}/`,
+  },
+  {
+    route: '/en/legal-notice', lang: 'en', fichier: 'dist/en/legal-notice/index.html',
+    url: `${SITE}/en/legal-notice`,
+    titre: 'Legal notice — Raphaël Perrot',
+    description: 'Legal notice for raphaelperrot.com: publisher, host, intellectual property and personal data.',
+    alt: `${SITE}/mentions-legales`,
+  },
 ];
 
 const gabarit = readFileSync(resolve(racine, 'dist/index.html'), 'utf-8');
+const echappe = (s) => s.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
 
-for (const { route, fichier } of pages) {
-  const html = render(route);
-  const sortie = gabarit.replace(
-    '<div id="root"></div>',
-    `<div id="root">${html}</div>`
-  );
-  const chemin = resolve(racine, fichier);
+for (const p of pages) {
+  const corps = render(p.route);
+  const fr_url = p.lang === 'fr' ? p.url : p.alt;
+  const en_url = p.lang === 'en' ? p.url : p.alt;
+
+  let html = gabarit
+    .replace('<html lang="fr">', `<html lang="${p.lang}">`)
+    .replace(/<title>[^<]*<\/title>/, `<title>${echappe(p.titre)}</title>`)
+    .replace(/<meta\s+name="description"\s+content="[^"]*"\s*\/>/, `<meta name="description" content="${echappe(p.description)}" />`)
+    .replace(/<link rel="canonical" href="[^"]*" \/>/, `<link rel="canonical" href="${p.url}" />`)
+    .replace(/<meta property="og:url" content="[^"]*" \/>/, `<meta property="og:url" content="${p.url}" />`)
+    .replace(/<meta property="og:title" content="[^"]*" \/>/, `<meta property="og:title" content="${echappe(p.titre)}" />`)
+    .replace(/<meta property="og:locale" content="[^"]*" \/>/, `<meta property="og:locale" content="${p.lang === 'fr' ? 'fr_FR' : 'en_GB'}" />`)
+    .replace('<div id="root"></div>', `<div id="root">${corps}</div>`);
+
+  // Indique à Google que les deux versions sont la même page en deux langues.
+  const hreflang =
+    `    <link rel="alternate" hreflang="fr" href="${fr_url}" />\n` +
+    `    <link rel="alternate" hreflang="en" href="${en_url}" />\n` +
+    `    <link rel="alternate" hreflang="x-default" href="${fr_url}" />\n`;
+  html = html.replace('</head>', hreflang + '  </head>');
+
+  const chemin = resolve(racine, p.fichier);
   mkdirSync(dirname(chemin), { recursive: true });
-  writeFileSync(chemin, sortie);
+  writeFileSync(chemin, html);
 
-  const mots = html.replace(/<[^>]+>/g, ' ').split(/\s+/).filter(Boolean).length;
-  console.log(`  ${route.padEnd(20)} → ${fichier.padEnd(34)} ${mots} mots`);
+  const mots = corps.replace(/<[^>]+>/g, ' ').split(/\s+/).filter(Boolean).length;
+  console.log(`  ${p.route.padEnd(20)} ${p.lang}  → ${p.fichier.padEnd(36)} ${mots} mots`);
 }
