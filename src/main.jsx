@@ -3,7 +3,6 @@ import { createRoot, hydrateRoot } from 'react-dom/client';
 import App from './App.jsx';
 import './fonts.css';
 import './styles.css';
-import { initReveal } from './reveal.js';
 
 const root = document.getElementById('root');
 const app = (
@@ -18,5 +17,3 @@ if (root.hasChildNodes()) {
 } else {
   createRoot(root).render(app);
 }
-
-initReveal();

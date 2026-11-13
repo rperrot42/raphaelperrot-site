@@ -1,8 +1,16 @@
 // Apparition progressive des sections au défilement.
 //
-// La classe est posée par JavaScript, jamais dans le HTML : si le script
-// ne s'exécute pas, tout reste visible. Une animation ne doit jamais
-// pouvoir masquer le contenu.
+// Deux garde-fous, appris à la dure :
+//
+// 1. La fonction doit être appelée APRÈS le rendu de React. Appelée avant,
+//    elle ne trouve aucun élément à observer, pose quand même la classe qui
+//    masque, et la page reste blanche. C'est invisible en production — où le
+//    HTML est pré-généré, donc déjà présent — mais fatal en développement.
+//
+// 2. Un filet de sécurité réaffiche tout au bout de 2,5 secondes. Quoi qu'il
+//    arrive, le contenu ne peut pas rester caché.
+
+const DELAI_SECOURS = 2500;
 
 export function initReveal() {
   const racine = document.documentElement;
@@ -11,9 +19,18 @@ export function initReveal() {
     window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
   if (sansAnimation || !('IntersectionObserver' in window)) return;
 
+  const cibles = document.querySelectorAll('[data-reveal]');
+  // Rien à animer : surtout ne pas poser la classe qui masque.
+  if (cibles.length === 0) return;
+
   racine.classList.add('js-reveal');
 
-  const cibles = document.querySelectorAll('[data-reveal]');
+  const toutAfficher = () => {
+    for (const c of document.querySelectorAll('[data-reveal]')) {
+      c.classList.add('est-visible');
+    }
+  };
+
   const observateur = new IntersectionObserver(
     (entrees) => {
       for (const e of entrees) {
@@ -33,4 +50,7 @@ export function initReveal() {
       observateur.observe(c);
     }
   }
+
+  const secours = setTimeout(toutAfficher, DELAI_SECOURS);
+  window.addEventListener('pagehide', () => clearTimeout(secours), { once: true });
 }

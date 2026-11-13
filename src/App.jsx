@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import Header from './components/Header.jsx';
 import Hero from './components/Hero.jsx';
 import Services from './components/Services.jsx';
@@ -11,6 +12,7 @@ import Footer from './components/Footer.jsx';
 import Legal from './pages/Legal.jsx';
 import ServicesPage from './pages/ServicesPage.jsx';
 import { LangContext, langFromPath, isLegalPath, isServicesPath } from './i18n.jsx';
+import { initReveal } from './reveal.js';
 
 // `route` est fourni au pré-rendu ; dans le navigateur on lit l'URL courante.
 export default function App({ route }) {
@@ -20,6 +22,11 @@ export default function App({ route }) {
   const legal = isLegalPath(path);
   const services = isServicesPath(path);
   const pageSeule = legal || services;
+
+  // Après le rendu : avant, il n'y a aucun élément à observer.
+  useEffect(() => {
+    initReveal();
+  }, []);
 
   return (
     <LangContext.Provider value={lang}>
