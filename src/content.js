@@ -2,9 +2,9 @@
 
 export const site = {
   url: 'https://raphaelperrot.com',
-  title: 'Raphaël Perrot — Développeur freelance à Lyon',
+  title: 'Raphaël Perrot — Développeur freelance à Toulouse',
   description:
-    'Développeur freelance près de Lyon. Sites e-commerce, outils métier sur mesure et automatisations pour les petites entreprises. Devis clair, un seul interlocuteur.',
+    'Développeur freelance à Toulouse et en Haute-Garonne. Sites e-commerce, outils métier sur mesure et automatisations pour les petites entreprises. Devis clair, un seul interlocuteur.',
 };
 
 export const contact = {
@@ -30,7 +30,7 @@ export const nav = [
 ];
 
 export const hero = {
-  eyebrow: 'Développeur freelance · Lyon',
+  eyebrow: 'Développeur freelance · Toulouse',
   titleStart: 'Des sites et des outils qui font ',
   titleHighlight: 'gagner du temps',
   titleEnd: ' aux petites entreprises.',
@@ -90,7 +90,7 @@ export const experience = [
   {
     when: 'Depuis 2026',
     title: 'Développeur freelance',
-    sub: 'Auto-entrepreneur · région lyonnaise',
+    sub: 'Auto-entrepreneur · Toulouse et Haute-Garonne',
     points: [
       'Sites et boutiques en ligne pour des indépendants et des petites entreprises.',
       'Outils internes et automatisations sur mesure.',
