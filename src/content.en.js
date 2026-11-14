@@ -87,6 +87,7 @@ const experience = [
     points: [
       'Websites and online stores for independents and small businesses.',
       'Internal tools and custom automation.',
+      'Run alongside my role at Wandeed: what I learn on a platform used by companies goes straight back to my own clients.',
     ],
   },
   {
