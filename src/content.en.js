@@ -153,7 +153,7 @@ const experience = [
 ];
 
 const sport = {
-  title: 'Cycling, for over ten years',
+  title: 'Cycling, in competition',
   text:
     "I work a lot, and sport is what taught me to keep it up over time: you do not improve by going all out every other day, you improve by showing up without skipping sessions. I train year round with a coach, towards goals set months in advance. I approach my clients' projects the same way: a clear deadline, steady milestones, and nothing left to the last minute.",
   youtubeId: '',
