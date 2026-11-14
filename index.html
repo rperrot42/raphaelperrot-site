@@ -28,6 +28,12 @@
     <meta property="og:image:alt" content="Raphaël Perrot, développeur freelance à Toulouse" />
     <meta name="twitter:card" content="summary_large_image" />
 
+    <!-- Les polices ne sont découvertes qu'après l'analyse du CSS. Les
+         précharger économise un aller-retour sur le texte le plus visible :
+         le titre (Space Grotesk) et le corps de texte (Inter). -->
+    <link rel="preload" href="/fonts/space-grotesk-700-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/inter-400-latin.woff2" as="font" type="font/woff2" crossorigin />
+
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
