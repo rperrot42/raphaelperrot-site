@@ -95,8 +95,10 @@ const experience = [
     sub: 'Teamber, a B2B SaaS ERP/CRM platform',
     points: [
       'Worked on several of the most complex parts of the platform.',
-      'Full rebuild of the scheduling module Gantt view: features laid out across a timeline, with tasks moved directly by dragging.',
-      'Designed and built the group management microservice, from data modelling through to production.',
+      'Full rebuild of the planning Gantt view: a project\u2019s tasks laid out across a timeline.',
+      'Designed the drag system inside the Gantt: grabbing a task with the mouse and repositioning it in time.',
+      'Rewrote the access-rights microservice: who can see and edit what, for each user group, across the whole platform.',
+      'Built project duplication: recreating an entire project, with everything it contains, in a single action.',
       'Java and Spring Boot back end on a microservice architecture, deployed and diagnosed on Kubernetes, shipped through Jenkins pipelines.',
       'Data modelling with JPA and PostgreSQL, following a DDD approach.',
     ],

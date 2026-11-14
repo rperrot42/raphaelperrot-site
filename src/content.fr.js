@@ -98,8 +98,10 @@ const experience = [
     sub: 'Teamber, plateforme ERP/CRM SaaS B2B',
     points: [
       "Intervenu sur plusieurs des parties les plus complexes de la plateforme.",
-      "Refonte complète de l'affichage Gantt de l'agenda : visualiser les fonctionnalités sur une frise temporelle, et déplacer les tâches directement à la souris.",
-      'Conception et développement du microservice de gestion des groupes, de la modélisation des données à la mise en production.',
+      "Refonte complète de l'affichage Gantt du planning : visualiser les tâches d'un projet sur une frise temporelle.",
+      "Conception du système de déplacement dans le Gantt : saisir une tâche à la souris et la repositionner dans le temps.",
+      "Réécriture du microservice de droits d'accès : qui peut voir et modifier quoi, pour chaque groupe d'utilisateurs, à travers toute la plateforme.",
+      'Développement de la duplication de projets : recréer en une action un projet entier avec tout ce qu’il contient.',
       "Back-end Java et Spring Boot sur une architecture microservices, déployée et diagnostiquée sur Kubernetes, livrée par des pipelines Jenkins.",
       'Modélisation des données avec JPA et PostgreSQL, selon une approche DDD.',
     ],
