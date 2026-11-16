@@ -408,4 +408,71 @@ const contactPage = {
   formTitre: 'Votre demande',
 };
 
-export default { contactPage, servicesPage, site, nav, hero, services, projects, method, experience, sport, about, portrait, contactSection, legal };
+
+// ── Libellés d'interface ────────────────────────────────────────────────
+// Ils vivaient en dur dans les composants, donc la version anglaise les
+// affichait en français.
+const ui = {
+  skip: 'Aller au contenu',
+  navAria: 'Navigation principale',
+  menuOuvrir: 'Ouvrir le menu',
+  menuFermer: 'Fermer le menu',
+  contactCta: 'Me contacter',
+  nouvelleFenetre: '(nouvelle fenêtre)',
+  retourAccueil: "Retour à l'accueil",
+  heroCta: 'Parlons de votre projet',
+  heroParcours: 'Mon parcours',
+  servicesEyebrow: 'Services',
+  servicesTitre: 'Ce que je fais',
+  workEyebrow: 'Réalisations',
+  workTitre: 'Des projets livrés',
+  workIntro: 'Chaque projet part du même endroit : un problème concret, et du temps à récupérer.',
+  workBesoin: 'Le besoin',
+  workLivre: "Ce que j'ai livré",
+  workVoirSite: 'Voir le site',
+  methodEyebrow: 'Méthode',
+  methodTitre: 'Comment je travaille avec vous',
+  experienceEyebrow: 'Parcours',
+  experienceTitre: "D'où je viens",
+  sportEyebrow: 'En dehors du code',
+  footerRole: 'Développeur freelance',
+  footerSiret: 'SIRET',
+  footerLegal: 'Mentions légales',
+};
+
+const legalPage = {
+  eyebrow: 'Informations légales',
+  titre: 'Mentions légales',
+  editeur: 'Éditeur du site',
+  responsable: 'Responsable de la publication :',
+  statut: 'Statut :',
+  statutValeur: 'Entrepreneur individuel (auto-entrepreneur)',
+  activite: 'Activité :',
+  siege: 'Siège social :',
+  siret: 'SIRET :',
+  immatriculation: 'Immatriculation :',
+  contactLabel: 'Contact :',
+  tva: 'TVA :',
+  hebergement: 'Hébergement',
+  piTitre: 'Propriété intellectuelle',
+  piTexte:
+    "L'ensemble des textes, visuels et éléments graphiques de ce site est la propriété de Raphaël Perrot, sauf mention contraire. Toute reproduction ou réutilisation, totale ou partielle, sans autorisation écrite préalable est interdite.",
+  donneesTitre: 'Données personnelles',
+  donneesTexte:
+    'Les informations transmises via le formulaire de contact (nom, adresse e-mail, message) servent uniquement à répondre à votre demande. Elles ne sont ni revendues, ni cédées, ni utilisées à des fins de prospection, et sont conservées douze mois au maximum après le dernier échange.',
+  rgpd: {
+    avant:
+      "Conformément au Règlement général sur la protection des données (RGPD) et à la loi « Informatique et Libertés », vous disposez d'un droit d'accès, de rectification, d'effacement, de limitation et d'opposition sur vos données. Pour l'exercer, écrivez à ",
+    entre: '. Vous pouvez également introduire une réclamation auprès de la ',
+    apres: '.',
+  },
+  cookiesTitre: "Cookies et mesure d'audience",
+  cookiesTexte:
+    "Ce site ne dépose aucun cookie, n'utilise aucun traceur publicitaire et n'intègre aucun outil de mesure d'audience. Les polices de caractères sont hébergées sur le site lui-même : aucune donnée n'est transmise à un service tiers lors de votre visite.",
+  liensTitre: 'Liens externes',
+  liensTexte:
+    "Ce site peut renvoyer vers des sites tiers. Leur contenu n'engage que leurs éditeurs respectifs.",
+  miseAJour: 'Dernière mise à jour : novembre 2026 · ',
+};
+
+export default { ui, legalPage, contactPage, servicesPage, site, nav, hero, services, projects, method, experience, sport, about, portrait, contactSection, legal };

@@ -26,10 +26,10 @@ function Photo({ photo }) {
 }
 
 export default function Sport() {
-  const { sport } = useContent();
+  const { sport, ui } = useContent();
 
   return (
-    <Section id="sport" eyebrow="En dehors du code" title={sport.title} intro={sport.text}>
+    <Section id="sport" eyebrow={ui.sportEyebrow} title={sport.title} intro={sport.text}>
       {sport.photos?.length > 0 && (
         <div className="sport-photos">
           {sport.photos.map((p) => (

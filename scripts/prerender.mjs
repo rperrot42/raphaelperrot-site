@@ -68,12 +68,25 @@ const pages = [
   },
 ];
 
+// Une 404 par langue. Apache ne sert qu'un seul ErrorDocument par dossier :
+// public/en/.htaccess déclare la sienne, pour qu'un visiteur anglais qui se
+// trompe d'URL ne tombe pas sur une page en français.
 pages.push({
   route: '/404', lang: 'fr', fichier: 'dist/404.html', url: `${SITE}/404`,
   titre: "Page introuvable — Raphaël Perrot",
   description: "Cette page n'existe pas ou a été déplacée.",
   alt: `${SITE}/`, noindex: true,
 });
+
+pages.push({
+  route: '/en/404', lang: 'en', fichier: 'dist/en/404.html', url: `${SITE}/en/404`,
+  titre: 'Page not found — Raphaël Perrot',
+  description: 'This page does not exist or has been moved.',
+  alt: `${SITE}/`, noindex: true,
+});
+
+const ALT_FR = 'Raphaël Perrot, développeur freelance à Toulouse';
+const ALT_EN = 'Raphaël Perrot, freelance developer in Toulouse';
 
 const gabarit = readFileSync(resolve(racine, 'dist/index.html'), 'utf-8');
 const echappe = (s) => s.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
@@ -91,6 +104,11 @@ for (const p of pages) {
     .replace(/<meta property="og:url" content="[^"]*" \/>/, `<meta property="og:url" content="${p.url}" />`)
     .replace(/<meta property="og:title" content="[^"]*" \/>/, `<meta property="og:title" content="${echappe(p.titre)}" />`)
     .replace(/<meta property="og:locale" content="[^"]*" \/>/, `<meta property="og:locale" content="${p.lang === 'fr' ? 'fr_FR' : 'en_GB'}" />`)
+    // og:description est écrit sur plusieurs lignes dans index.html : sans le
+    // drapeau /s, il n'était jamais remplacé et les pages anglaises
+    // partageaient une description française sur les réseaux sociaux.
+    .replace(/<meta\s+property="og:description"\s+content="[^"]*"\s*\/>/s, `<meta property="og:description" content="${echappe(p.description)}" />`)
+    .replace(/<meta property="og:image:alt" content="[^"]*" \/>/, `<meta property="og:image:alt" content="${echappe(p.lang === 'fr' ? ALT_FR : ALT_EN)}" />`)
     .replace('<div id="root"></div>', `<div id="root">${corps}</div>`);
 
   // Indique à Google que les deux versions sont la même page en deux langues.

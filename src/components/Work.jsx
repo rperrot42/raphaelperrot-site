@@ -2,13 +2,13 @@ import Section from './Section.jsx';
 import { useContent } from '../i18n.jsx';
 
 export default function Work() {
-  const { projects } = useContent();
+  const { projects, ui } = useContent();
   return (
     <Section
       id="realisations"
-      eyebrow="Réalisations"
-      title="Des projets livrés"
-      intro="Chaque projet part du même endroit : un problème concret, et du temps à récupérer."
+      eyebrow={ui.workEyebrow}
+      title={ui.workTitre}
+      intro={ui.workIntro}
     >
       <div className="projects">
         {projects.map((p) => (
@@ -38,11 +38,11 @@ export default function Work() {
             <div className="sub">{p.sub}</div>
 
             <div className="project-block">
-              <div className="label">Le besoin</div>
+              <div className="label">{ui.workBesoin}</div>
               <p>{p.problem}</p>
             </div>
             <div className="project-block">
-              <div className="label">Ce que j'ai livré</div>
+              <div className="label">{ui.workLivre}</div>
               <p>{p.done}</p>
             </div>
 
@@ -56,8 +56,8 @@ export default function Work() {
 
             {p.url && (
               <a className="link" href={p.url} target="_blank" rel="noopener noreferrer">
-                Voir le site <span aria-hidden="true">→</span>
-                <span className="sr-only"> (nouvelle fenêtre)</span>
+                {ui.workVoirSite} <span aria-hidden="true">→</span>
+                <span className="sr-only"> {ui.nouvelleFenetre}</span>
               </a>
             )}
           </article>

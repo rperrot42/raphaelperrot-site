@@ -1,0 +1,6 @@
+# Page d'erreur propre à la version anglaise.
+#
+# Apache ne retient qu'un ErrorDocument par dossier : sans ce fichier, une
+# URL anglaise inexistante renvoyait la page 404 française déclarée à la
+# racine. Ce fichier ne vaut que pour /en/ et ses sous-dossiers.
+ErrorDocument 404 /en/404.html

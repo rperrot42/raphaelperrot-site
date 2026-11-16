@@ -2,9 +2,9 @@ import Section from './Section.jsx';
 import { useContent } from '../i18n.jsx';
 
 export default function Experience() {
-  const { experience } = useContent();
+  const { experience, ui } = useContent();
   return (
-    <Section id="experience" eyebrow="Parcours" title="D'où je viens">
+    <Section id="experience" eyebrow={ui.experienceEyebrow} title={ui.experienceTitre}>
       {experience.map((job) => (
         <div className="item" key={job.title}>
           <div className="when">{job.when}</div>

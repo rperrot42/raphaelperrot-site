@@ -24,7 +24,7 @@ export default function App({ route }) {
   const legal = isLegalPath(path);
   const services = isServicesPath(path);
   const contactSeul = isContactPath(path);
-  const introuvable = path === '/404';
+  const introuvable = path === '/404' || path === '/en/404';
   const pageSeule = legal || services || contactSeul || introuvable;
 
   // Après le rendu : avant, il n'y a aucun élément à observer.

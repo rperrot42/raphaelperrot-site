@@ -1,5 +1,5 @@
 import { contact } from '../shared.js';
-import { useContent } from '../i18n.jsx';
+import { useContent, useLang, langues } from '../i18n.jsx';
 
 function Line({ label, children }) {
   return (
@@ -10,71 +10,65 @@ function Line({ label, children }) {
 }
 
 export default function Legal() {
-  const { legal, site } = useContent();
+  const { legal, site, ui, legalPage: t } = useContent();
+  const lang = useLang();
+  // Le retour pointait toujours vers « / » : depuis la version anglaise,
+  // il renvoyait sur l'accueil français.
+  const accueil = langues.find((l) => l.code === lang).racine;
+
   return (
     <section className="legal">
       <div className="wrap">
-        <a className="back" href="/">
-          <span aria-hidden="true">←</span> Retour à l'accueil
+        <a className="back" href={accueil}>
+          <span aria-hidden="true">←</span> {ui.retourAccueil}
         </a>
-        <div className="eyebrow">Informations légales</div>
-        <h1>Mentions légales</h1>
+        <div className="eyebrow">{t.eyebrow}</div>
+        <h1>{t.titre}</h1>
 
-        <h2>Éditeur du site</h2>
-        <Line label="Responsable de la publication :">Raphaël Perrot</Line>
-        <Line label="Statut :">Entrepreneur individuel (auto-entrepreneur)</Line>
-        <Line label="Activité :">{legal.activity}</Line>
-        {contact.address && <Line label="Siège social :">{contact.address}</Line>}
-        <Line label="SIRET :">{contact.siret}</Line>
-        {legal.registered && <Line label="Immatriculation :">{legal.registered}</Line>}
-        <Line label="Contact :">
+        <h2>{t.editeur}</h2>
+        <Line label={t.responsable}>Raphaël Perrot</Line>
+        <Line label={t.statut}>{t.statutValeur}</Line>
+        <Line label={t.activite}>{legal.activity}</Line>
+        {contact.address && <Line label={t.siege}>{contact.address}</Line>}
+        <Line label={t.siret}>{contact.siret}</Line>
+        {legal.registered && <Line label={t.immatriculation}>{legal.registered}</Line>}
+        <Line label={t.contactLabel}>
           <a href={`mailto:${contact.email}`}>{contact.email}</a> · {contact.phone}
         </Line>
-        <Line label="TVA :">{legal.vat}</Line>
+        <Line label={t.tva}>{legal.vat}</Line>
 
-        <h2>Hébergement</h2>
+        <h2>{t.hebergement}</h2>
         <Line label={legal.host.name}>
           {legal.host.address} —{' '}
           <a href={legal.host.url} target="_blank" rel="noopener noreferrer">
             {legal.host.url.replace('https://', '')}
+            <span className="sr-only"> {ui.nouvelleFenetre}</span>
           </a>
         </Line>
 
-        <h2>Propriété intellectuelle</h2>
+        <h2>{t.piTitre}</h2>
+        <p>{t.piTexte}</p>
+
+        <h2>{t.donneesTitre}</h2>
+        <p>{t.donneesTexte}</p>
         <p>
-          L'ensemble des textes, visuels et éléments graphiques de ce site est la propriété de Raphaël
-          Perrot, sauf mention contraire. Toute reproduction ou réutilisation, totale ou partielle, sans
-          autorisation écrite préalable est interdite.
+          {t.rgpd.avant}
+          <a href={`mailto:${contact.email}`}>{contact.email}</a>
+          {t.rgpd.entre}
+          <a href="https://www.cnil.fr" target="_blank" rel="noopener noreferrer">
+            CNIL
+            <span className="sr-only"> {ui.nouvelleFenetre}</span>
+          </a>
+          {t.rgpd.apres}
         </p>
 
-        <h2>Données personnelles</h2>
-        <p>
-          Les informations transmises via le formulaire de contact (nom, adresse e-mail, message) servent
-          uniquement à répondre à votre demande. Elles ne sont ni revendues, ni cédées, ni utilisées à des
-          fins de prospection, et sont conservées douze mois au maximum après le dernier échange.
-        </p>
-        <p>
-          Conformément au Règlement général sur la protection des données (RGPD) et à la loi
-          « Informatique et Libertés », vous disposez d'un droit d'accès, de rectification, d'effacement,
-          de limitation et d'opposition sur vos données. Pour l'exercer, écrivez à{' '}
-          <a href={`mailto:${contact.email}`}>{contact.email}</a>. Vous pouvez également introduire une
-          réclamation auprès de la{' '}
-          <a href="https://www.cnil.fr" target="_blank" rel="noopener noreferrer">CNIL</a>.
-        </p>
+        <h2>{t.cookiesTitre}</h2>
+        <p>{t.cookiesTexte}</p>
 
-        <h2>Cookies et mesure d'audience</h2>
-        <p>
-          Ce site ne dépose aucun cookie, n'utilise aucun traceur publicitaire et n'intègre aucun outil de
-          mesure d'audience. Les polices de caractères sont hébergées sur le site lui-même : aucune donnée
-          n'est transmise à un service tiers lors de votre visite.
-        </p>
+        <h2>{t.liensTitre}</h2>
+        <p>{t.liensTexte}</p>
 
-        <h2>Liens externes</h2>
-        <p>
-          Ce site peut renvoyer vers des sites tiers. Leur contenu n'engage que leurs éditeurs respectifs.
-        </p>
-
-        <p className="legal-updated">Dernière mise à jour : novembre 2026 · {site.url}</p>
+        <p className="legal-updated">{t.miseAJour}{site.url}</p>
       </div>
     </section>
   );

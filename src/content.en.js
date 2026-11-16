@@ -399,4 +399,71 @@ const contactPage = {
   formTitre: 'Your enquiry',
 };
 
-export default { contactPage, servicesPage, site, nav, hero, services, projects, method, experience, sport, about, portrait, contactSection, legal };
+
+// ── Interface labels ────────────────────────────────────────────────────
+// These used to be hardcoded in the components, so the English site showed
+// them in French.
+const ui = {
+  skip: 'Skip to content',
+  navAria: 'Main navigation',
+  menuOuvrir: 'Open menu',
+  menuFermer: 'Close menu',
+  contactCta: 'Get in touch',
+  nouvelleFenetre: '(opens in a new window)',
+  retourAccueil: 'Back to home',
+  heroCta: "Let's talk about your project",
+  heroParcours: 'My background',
+  servicesEyebrow: 'Services',
+  servicesTitre: 'What I do',
+  workEyebrow: 'Work',
+  workTitre: 'Projects delivered',
+  workIntro: 'Every project starts in the same place: a concrete problem, and time to win back.',
+  workBesoin: 'The need',
+  workLivre: 'What I delivered',
+  workVoirSite: 'Visit the site',
+  methodEyebrow: 'How I work',
+  methodTitre: 'How I work with you',
+  experienceEyebrow: 'Background',
+  experienceTitre: 'Where I come from',
+  sportEyebrow: 'Away from the code',
+  footerRole: 'Freelance developer',
+  footerSiret: 'SIRET',
+  footerLegal: 'Legal notice',
+};
+
+const legalPage = {
+  eyebrow: 'Legal information',
+  titre: 'Legal notice',
+  editeur: 'Site publisher',
+  responsable: 'Publication manager:',
+  statut: 'Status:',
+  statutValeur: 'Sole trader (French auto-entrepreneur)',
+  activite: 'Activity:',
+  siege: 'Registered office:',
+  siret: 'SIRET:',
+  immatriculation: 'Registered on:',
+  contactLabel: 'Contact:',
+  tva: 'VAT:',
+  hebergement: 'Hosting',
+  piTitre: 'Intellectual property',
+  piTexte:
+    'All text, images and graphic elements on this site are the property of Raphaël Perrot unless stated otherwise. Any reproduction or reuse, in whole or in part, without prior written permission is prohibited.',
+  donneesTitre: 'Personal data',
+  donneesTexte:
+    'The information submitted through the contact form (name, email address, message) is used solely to answer your enquiry. It is never sold, never passed on, never used for cold outreach, and is kept for a maximum of twelve months after the last exchange.',
+  rgpd: {
+    avant:
+      'Under the General Data Protection Regulation (GDPR) and the French Data Protection Act, you have the right to access, rectify, erase, restrict and object to the processing of your data. To exercise it, write to ',
+    entre: '. You may also lodge a complaint with the French data protection authority, the ',
+    apres: '.',
+  },
+  cookiesTitre: 'Cookies and analytics',
+  cookiesTexte:
+    'This site sets no cookies, uses no advertising trackers and includes no analytics tool. The fonts are hosted on the site itself: no data is sent to any third-party service when you visit.',
+  liensTitre: 'External links',
+  liensTexte:
+    'This site may link to third-party sites. Their content is the sole responsibility of their respective publishers.',
+  miseAJour: 'Last updated: November 2026 · ',
+};
+
+export default { ui, legalPage, contactPage, servicesPage, site, nav, hero, services, projects, method, experience, sport, about, portrait, contactSection, legal };

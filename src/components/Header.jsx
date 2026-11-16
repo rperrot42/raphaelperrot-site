@@ -3,7 +3,7 @@ import Logo from './Logo.jsx';
 import { useContent, useLang, langues } from '../i18n.jsx';
 
 export default function Header({ home = true }) {
-  const { nav } = useContent();
+  const { nav, ui } = useContent();
   const lang = useLang();
   const courante = langues.find((l) => l.code === lang);
   const autre = langues.find((l) => l.code !== lang);
@@ -14,7 +14,7 @@ export default function Header({ home = true }) {
 
   return (
     <header className="header">
-      <a className="skip" href="#main">Aller au contenu</a>
+      <a className="skip" href="#main">{ui.skip}</a>
       <div className="wrap header-inner">
         <a className="brand" href={home ? '#top' : courante.racine} onClick={() => setOpen(false)}>
           <Logo size={46} />
@@ -25,14 +25,14 @@ export default function Header({ home = true }) {
           type="button"
           aria-expanded={open}
           aria-controls="main-nav"
-          aria-label={open ? 'Fermer le menu' : 'Ouvrir le menu'}
+          aria-label={open ? ui.menuFermer : ui.menuOuvrir}
           onClick={() => setOpen(!open)}
         >
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
             {open ? <path d="M6 6l12 12M18 6L6 18" /> : <path d="M4 7h16M4 12h16M4 17h16" />}
           </svg>
         </button>
-        <nav id="main-nav" className={open ? 'nav open' : 'nav'} aria-label="Navigation principale">
+        <nav id="main-nav" className={open ? 'nav open' : 'nav'} aria-label={ui.navAria}>
           {nav
             .filter((item) => item.id !== 'contact')
             .map((item) => (
@@ -45,7 +45,7 @@ export default function Header({ home = true }) {
               </a>
             ))}
           <a className="nav-cta" href={courante.contact} onClick={() => setOpen(false)}>
-            {lang === 'fr' ? 'Me contacter' : 'Get in touch'}
+            {ui.contactCta}
           </a>
           <a className="nav-lang" href={autre.racine} hrefLang={autre.code} lang={autre.code}>
             {autre.label}
