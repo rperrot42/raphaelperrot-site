@@ -88,6 +88,60 @@ pages.push({
 const ALT_FR = 'Raphaël Perrot, développeur freelance à Toulouse';
 const ALT_EN = 'Raphaël Perrot, freelance developer in Toulouse';
 
+// Le JSON-LD du gabarit est en français. Recopié tel quel, il décrivait
+// l'activité en français jusque sur les pages anglaises, et annonçait
+// « knowsLanguage: fr » alors que le site existe dans les deux langues.
+// On le relit, on le traduit, on le réécrit — plutôt qu'un remplacement
+// de texte à l'aveugle qui casserait le JSON à la première virgule.
+const EN_JSONLD = {
+  name: 'Raphaël Perrot — Freelance developer',
+  description:
+    'Freelance developer near Toulouse, France: e-commerce sites, custom business tools and automation for small businesses.',
+  jobTitle: 'Freelance developer',
+  knowsAbout: ['Web development', 'E-commerce', 'Shopify', 'Java', 'Spring Boot', 'Automation', 'PostgreSQL', 'Kubernetes'],
+  offres: ['E-commerce sites', 'Custom business tools', 'Automation'],
+};
+
+function jsonLd(html, lang) {
+  const motif = /<script type="application\/ld\+json">\s*([\s\S]*?)\s*<\/script>/;
+  const trouve = html.match(motif);
+  if (!trouve) return html;
+
+  let donnees;
+  try {
+    donnees = JSON.parse(trouve[1]);
+  } catch {
+    // JSON invalide dans le gabarit : on laisse tel quel plutôt que de
+    // produire une page cassée, et on le signale à la construction.
+    console.warn('  ⚠ JSON-LD illisible dans index.html : laissé inchangé');
+    return html;
+  }
+
+  // Le site est bilingue dans les deux cas.
+  donnees.knowsLanguage = ['fr', 'en'];
+
+  if (lang === 'en') {
+    donnees.name = EN_JSONLD.name;
+    donnees.description = EN_JSONLD.description;
+    donnees.url = `${SITE}/en`;
+    if (donnees.founder) {
+      donnees.founder.jobTitle = EN_JSONLD.jobTitle;
+      donnees.founder.knowsAbout = EN_JSONLD.knowsAbout;
+    }
+    if (Array.isArray(donnees.makesOffer)) {
+      donnees.makesOffer = donnees.makesOffer.map((o, i) => ({
+        ...o,
+        itemOffered: { ...o.itemOffered, name: EN_JSONLD.offres[i] ?? o.itemOffered.name },
+      }));
+    }
+  }
+
+  return html.replace(
+    motif,
+    `<script type="application/ld+json">\n${JSON.stringify(donnees, null, 2)}\n    </script>`
+  );
+}
+
 const gabarit = readFileSync(resolve(racine, 'dist/index.html'), 'utf-8');
 const echappe = (s) => s.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
 
@@ -110,6 +164,8 @@ for (const p of pages) {
     .replace(/<meta\s+property="og:description"\s+content="[^"]*"\s*\/>/s, `<meta property="og:description" content="${echappe(p.description)}" />`)
     .replace(/<meta property="og:image:alt" content="[^"]*" \/>/, `<meta property="og:image:alt" content="${echappe(p.lang === 'fr' ? ALT_FR : ALT_EN)}" />`)
     .replace('<div id="root"></div>', `<div id="root">${corps}</div>`);
+
+  html = jsonLd(html, p.lang);
 
   // Indique à Google que les deux versions sont la même page en deux langues.
   const hreflang =
