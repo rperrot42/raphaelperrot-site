@@ -80,8 +80,16 @@ section { padding: 84px 0; border-top: 1px solid var(--line); }
 .nav .nav-cta {
   background: var(--ink); color: var(--bg); padding: 10px 18px; border-radius: 9px;
   font-weight: 600; margin-left: 4px;
+  transition: background 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
 }
-.nav .nav-cta:hover { background: #0b241d; }
+/* L'ancien survol (#0b241d) ne changeait la luminance que de 1,4 % : on ne
+   voyait rien bouger. --green en change 9 %, et garde 5,7:1 avec le texte. */
+.nav .nav-cta:hover {
+  background: var(--green);
+  transform: translateY(-1px);
+  box-shadow: 0 5px 14px -5px rgba(31, 110, 73, 0.55);
+}
+.nav .nav-cta:active { transform: translateY(0); box-shadow: none; }
 .nav .nav-cta::after { display: none; }
 .nav .nav-lang {
   border: 1.5px solid var(--line); border-radius: 8px; padding: 7px 11px;
@@ -110,7 +118,7 @@ section { padding: 84px 0; border-top: 1px solid var(--line); }
   font-family: inherit; transition: background 0.15s, color 0.15s;
 }
 .btn-primary { background: var(--ink); color: var(--bg); border: 1.5px solid var(--ink); }
-.btn-primary:hover { background: #0b241d; }
+.btn-primary:hover { background: var(--green); border-color: var(--green); }
 .btn-primary[disabled] { opacity: 0.6; cursor: default; }
 .btn-ghost { border: 1.5px solid var(--ink); color: var(--ink); background: none; }
 .btn-icon { margin-right: 8px; flex-shrink: 0; }
@@ -253,7 +261,7 @@ section { padding: 84px 0; border-top: 1px solid var(--line); }
 }
 .contact-form-card textarea::placeholder { color: #9aa8a1; }
 .contact-form-card .btn-primary { background: var(--ink); color: var(--bg); border-color: var(--ink); }
-.contact-form-card .btn-primary:hover { background: #0b241d; }
+.contact-form-card .btn-primary:hover { background: var(--green); border-color: var(--green); }
 .contact-form-card :focus-visible { outline-color: var(--green); }
 
 .form { margin: 0; max-width: none; }
@@ -261,6 +269,36 @@ section { padding: 84px 0; border-top: 1px solid var(--line); }
 .field { display: flex; flex-direction: column; margin-bottom: 18px; }
 .btn-block { width: 100%; }
 .gotcha { position: absolute; left: -9999px; opacity: 0; height: 0; width: 0; }
+/* Validation maison : le formulaire porte noValidate, donc rien de ce que
+   Chrome affiche par défaut n'apparaît. Ces styles remplacent la bulle. */
+.field-error {
+  display: flex; align-items: flex-start; gap: 7px;
+  color: #b4342b; font-size: 14.5px; line-height: 1.4;
+  margin-top: 7px;
+  animation: erreur-entre 0.22s ease both;
+}
+.field-error svg { flex: none; margin-top: 1px; }
+@keyframes erreur-entre {
+  from { opacity: 0; transform: translateY(-3px); }
+  to   { opacity: 1; transform: none; }
+}
+.field-bas {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  gap: 14px; margin-top: 0;
+}
+.field-bas .field-error { flex: 1 1 auto; }
+.field-compteur {
+  flex: none; margin-top: 7px;
+  color: #8c9b93; font-size: 13.5px;
+  font-variant-numeric: tabular-nums;
+  transition: color 0.18s ease;
+}
+.field-compteur.bas { color: #b4342b; }
+/* Le champ fautif se signale aussi par sa bordure, pas seulement par le
+   texte : un seul indice visuel ne suffit pas (WCAG 1.4.1). */
+.form [aria-invalid='true'] { border-color: #b4342b; background: #fdf7f6; }
+.form [aria-invalid='true']:focus { border-color: #b4342b; box-shadow: 0 0 0 4px rgba(180, 52, 43, 0.12); }
+
 .form-status { min-height: 0; margin: 14px 0 0; color: #b4342b; font-size: 15px; }
 .form-status:empty { margin: 0; }
 .form-status a { color: #b4342b; font-weight: 600; }
@@ -310,7 +348,7 @@ section { padding: 84px 0; border-top: 1px solid var(--line); }
 .contact-page-form textarea::placeholder { color: #9aa8a1; }
 .contact-page-form .field { margin-bottom: 20px; }
 .contact-page-form .btn-primary { background: var(--ink); color: var(--bg); border-color: var(--ink); min-height: 54px; font-size: 17px; }
-.contact-page-form .btn-primary:hover { background: #0b241d; }
+.contact-page-form .btn-primary:hover { background: var(--green); border-color: var(--green); }
 .contact-page-form :focus-visible { outline-color: var(--green); }
 
 .contact-page-aside > .label {
@@ -414,6 +452,8 @@ section { padding: 84px 0; border-top: 1px solid var(--line); }
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .nav .nav-cta:hover { transform: none; }
+  .field-error { animation: none; }
   html { scroll-behavior: auto; }
   * { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
   .js-reveal [data-reveal] { opacity: 1 !important; transform: none !important; }

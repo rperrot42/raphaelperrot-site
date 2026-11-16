@@ -1,6 +1,10 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { contact } from '../shared.js';
 import { useLang } from '../i18n.jsx';
+
+const MESSAGE_MIN = 5;
+const MESSAGE_MAX = 5000;
+const NOM_MAX = 120;
 
 const T = {
   fr: {
@@ -13,15 +17,22 @@ const T = {
     plusRapide: "Besoin d'une réponse plus rapide ? Appelez-moi au",
     erreur: "L'envoi a échoué. Appelez-moi au",
     ou: 'ou écrivez à',
-    champ: {
-      nom: 'Indiquez votre nom (120 caractères maximum).',
-      email: "Cette adresse e-mail n'est pas valide.",
-      message: 'Écrivez quelques mots de plus : cinq caractères au minimum.',
-    },
-    champAutre: 'Un champ est invalide.',
     legal: 'Vos coordonnées servent uniquement à vous répondre. Ni revendues, ni utilisées pour de la prospection.',
     enSavoirPlus: 'En savoir plus',
     legalLien: '/mentions-legales',
+    err: {
+      nomVide: 'Indiquez votre nom, que je sache à qui je réponds.',
+      nomLong: `Ce nom dépasse ${NOM_MAX} caractères.`,
+      emailVide: 'Il me faut votre e-mail pour pouvoir vous répondre.',
+      emailInvalide: "Cette adresse e-mail n'a pas l'air valide.",
+      messageVide: 'Dites-moi en quelques mots ce dont vous avez besoin.',
+      messageCourt: 'Quelques mots de plus, que je comprenne votre demande.',
+      messageLong: 'Ce message est trop long. Allez à l’essentiel, on détaillera ensuite.',
+      autre: 'Ce champ doit être corrigé.',
+    },
+    indice: `${MESSAGE_MIN} caractères minimum`,
+    manque: (n) => (n === 1 ? 'encore 1 caractère' : `encore ${n} caractères`),
+    restants: (n) => (n === 1 ? '1 caractère restant' : `${n} caractères restants`),
   },
   en: {
     nom: 'Your name', email: 'Your email',
@@ -33,24 +44,90 @@ const T = {
     plusRapide: 'Need a faster answer? Call me on',
     erreur: 'Sending failed. Call me on',
     ou: 'or write to',
-    champ: {
-      nom: 'Please enter your name (120 characters maximum).',
-      email: 'This email address is not valid.',
-      message: 'Please write a few more words: five characters minimum.',
-    },
-    champAutre: 'A field is invalid.',
     legal: 'Your details are only used to reply to you. Never sold, never used for cold outreach.',
     enSavoirPlus: 'Learn more',
     legalLien: '/en/legal-notice',
+    err: {
+      nomVide: "Let me know your name, so I know who I'm replying to.",
+      nomLong: `That name is longer than ${NOM_MAX} characters.`,
+      emailVide: 'I need your email address to be able to reply.',
+      emailInvalide: "That email address doesn't look valid.",
+      messageVide: 'Tell me in a few words what you need.',
+      messageCourt: 'A few more words, so I can understand what you need.',
+      messageLong: 'That message is too long. Give me the gist — we can go into detail later.',
+      autre: 'This field needs fixing.',
+    },
+    indice: `${MESSAGE_MIN} characters minimum`,
+    manque: (n) => (n === 1 ? '1 more character' : `${n} more characters`),
+    restants: (n) => (n === 1 ? '1 character left' : `${n} characters left`),
   },
 };
 
+// Volontairement permissive : la validation stricte reste côté serveur.
+// Ici on veut seulement attraper la faute de frappe évidente.
+const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+function valider(valeurs, t) {
+  const e = {};
+  const nom = valeurs.name.trim();
+  const email = valeurs.email.trim();
+  const message = valeurs.message.trim();
+
+  if (!nom) e.name = t.err.nomVide;
+  else if (nom.length > NOM_MAX) e.name = t.err.nomLong;
+
+  if (!email) e.email = t.err.emailVide;
+  else if (!EMAIL.test(email)) e.email = t.err.emailInvalide;
+
+  if (!message) e.message = t.err.messageVide;
+  else if (message.length < MESSAGE_MIN) e.message = t.err.messageCourt;
+  else if (message.length > MESSAGE_MAX) e.message = t.err.messageLong;
+
+  return e;
+}
+
+// Le serveur ne connaît pas la langue du visiteur : il renvoie des codes de
+// champ, les libellés restent ici.
+const CODE_VERS_CHAMP = { nom: 'name', email: 'email', message: 'message' };
+
 export default function ContactForm({ idPrefix = 'c', onSent }) {
   const [status, setStatus] = useState('idle');
-  const [refuses, setRefuses] = useState([]);
+  const [erreurs, setErreurs] = useState({});
+  const [longueur, setLongueur] = useState(0);
+  const formRef = useRef(null);
   const lang = useLang();
   const t = T[lang];
   const id = (n) => `${idPrefix}-${n}`;
+  const errId = (n) => `${idPrefix}-${n}-err`;
+
+  function lire(form) {
+    const d = new FormData(form);
+    return {
+      name: String(d.get('name') ?? ''),
+      email: String(d.get('email') ?? ''),
+      message: String(d.get('message') ?? ''),
+    };
+  }
+
+  // Une fois qu'un champ a été signalé, on le revalide à la frappe : l'erreur
+  // disparaît dès qu'elle est corrigée, sans attendre un nouvel envoi.
+  function handleInput(e) {
+    const champ = e.target.name;
+    if (champ === 'message') setLongueur(e.target.value.trim().length);
+    if (!erreurs[champ]) return;
+    const maj = valider(lire(formRef.current), t);
+    setErreurs((prec) => {
+      const suite = { ...prec };
+      if (maj[champ]) suite[champ] = maj[champ];
+      else delete suite[champ];
+      return suite;
+    });
+  }
+
+  function focusPremierFautif(champs) {
+    const premier = ['name', 'email', 'message'].find((c) => champs[c]);
+    if (premier) formRef.current?.elements[premier]?.focus();
+  }
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -58,7 +135,18 @@ export default function ContactForm({ idPrefix = 'c', onSent }) {
     const data = new FormData(form);
     if (data.get('_gotcha')) return;
 
-    setRefuses([]);
+    // Le formulaire porte noValidate : aucune bulle native du navigateur
+    // n'apparaît. Les messages sont écrits, traduits, et affichés sous le
+    // champ concerné.
+    const fautes = valider(lire(form), t);
+    if (Object.keys(fautes).length) {
+      setErreurs(fautes);
+      setStatus('idle');
+      focusPremierFautif(fautes);
+      return;
+    }
+
+    setErreurs({});
     setStatus('sending');
     try {
       const res = await fetch(contact.formEndpoint, {
@@ -76,18 +164,27 @@ export default function ContactForm({ idPrefix = 'c', onSent }) {
       } catch {
         throw new Error('réponse illisible');
       }
-      // Un champ invalide (422) n'est PAS une panne d'envoi. Avant, les deux
-      // cas donnaient le même message — « L'envoi a échoué, appelez-moi » —
-      // alors qu'il suffisait d'allonger le message de trois mots. On disait
-      // à un prospect que le site était cassé.
+
+      // Filet de sécurité : si le serveur refuse un champ que la validation
+      // locale a laissé passer, on l'affiche au bon endroit plutôt que
+      // d'annoncer une panne d'envoi.
       if (res.status === 422 && Array.isArray(reponse?.champs) && reponse.champs.length) {
-        setRefuses(reponse.champs);
-        setStatus('invalide');
+        const locales = valider(lire(form), t);
+        const fautesServeur = {};
+        for (const code of reponse.champs) {
+          const champ = CODE_VERS_CHAMP[code];
+          if (champ) fautesServeur[champ] = locales[champ] ?? t.err.autre;
+        }
+        if (!Object.keys(fautesServeur).length) fautesServeur.message = t.err.autre;
+        setErreurs(fautesServeur);
+        setStatus('idle');
+        focusPremierFautif(fautesServeur);
         return;
       }
 
       if (!res.ok || reponse?.ok !== true) throw new Error('refusé');
       form.reset();
+      setLongueur(0);
       setStatus('sent');
       onSent?.();
     } catch {
@@ -111,22 +208,45 @@ export default function ContactForm({ idPrefix = 'c', onSent }) {
     );
   }
 
+  const Erreur = ({ champ }) =>
+    erreurs[champ] ? (
+      <span className="field-error" id={errId(champ)} role="alert">
+        <svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true">
+          <circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" strokeWidth="1.5" />
+          <path d="M8 4.4v4.4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+          <circle cx="8" cy="11.4" r="0.9" fill="currentColor" />
+        </svg>
+        {erreurs[champ]}
+      </span>
+    ) : null;
+
+  const champProps = (n) => ({
+    name: n,
+    id: id(n),
+    onInput: handleInput,
+    'aria-invalid': erreurs[n] ? true : undefined,
+    'aria-describedby': erreurs[n] ? errId(n) : undefined,
+  });
+
+  // Compteur : discret tant que tout va bien, informatif quand il le faut.
+  const compteur =
+    longueur === 0 ? t.indice
+    : longueur < MESSAGE_MIN ? t.manque(MESSAGE_MIN - longueur)
+    : longueur > MESSAGE_MAX - 500 ? t.restants(Math.max(0, MESSAGE_MAX - longueur))
+    : null;
+
   return (
-    <form className="form" onSubmit={handleSubmit}>
+    <form className="form" onSubmit={handleSubmit} ref={formRef} noValidate>
       <div className="form-row">
         <div className="field">
           <label htmlFor={id('name')}>{t.nom}</label>
-          <input
-            id={id('name')} name="name" type="text" required maxLength={120}
-            autoComplete="name" aria-invalid={refuses.includes('nom') || undefined}
-          />
+          <input {...champProps('name')} type="text" maxLength={NOM_MAX} autoComplete="name" />
+          <Erreur champ="name" />
         </div>
         <div className="field">
           <label htmlFor={id('email')}>{t.email}</label>
-          <input
-            id={id('email')} name="email" type="email" required
-            autoComplete="email" aria-invalid={refuses.includes('email') || undefined}
-          />
+          <input {...champProps('email')} type="email" autoComplete="email" />
+          <Erreur champ="email" />
         </div>
       </div>
 
@@ -139,14 +259,15 @@ export default function ContactForm({ idPrefix = 'c', onSent }) {
 
       <div className="field">
         <label htmlFor={id('message')}>{t.message}</label>
-        {/* minLength/maxLength : le navigateur refuse lui-même, avec son
-            propre message, avant même d'appeler le serveur. L'aller-retour
-            qui finissait en « l'envoi a échoué » n'a plus lieu. */}
-        <textarea
-          id={id('message')} name="message" rows="6" required
-          minLength={5} maxLength={5000} placeholder={t.exemple}
-          aria-invalid={refuses.includes('message') || undefined}
-        />
+        <textarea {...champProps('message')} rows="6" maxLength={MESSAGE_MAX} placeholder={t.exemple} />
+        <div className="field-bas">
+          <Erreur champ="message" />
+          {compteur && (
+            <span className={`field-compteur${longueur > 0 && longueur < MESSAGE_MIN ? ' bas' : ''}`} aria-hidden="true">
+              {compteur}
+            </span>
+          )}
+        </div>
       </div>
 
       <input type="text" name="_gotcha" tabIndex="-1" autoComplete="off" aria-hidden="true" className="gotcha" />
@@ -156,7 +277,6 @@ export default function ContactForm({ idPrefix = 'c', onSent }) {
       </button>
 
       <p className="form-status" role="status" aria-live="polite">
-        {status === 'invalide' && refuses.map((c) => t.champ[c] ?? t.champAutre).join(' ')}
         {status === 'error' && (
           <>
             {t.erreur} <a href={contact.phoneLink}>{contact.phone}</a> {t.ou}{' '}
