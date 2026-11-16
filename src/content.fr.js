@@ -192,7 +192,7 @@ const sport = {
       title: 'Triathlon',
       lines: [
         "Triathlon d'Embrun, format M, en 2026.",
-        '5 km en 19 min 17, seul sur piste.',
+        '5 km en 19 min 17 sur piste.',
         'Semi-marathon en 1h36.',
         'Entraînement encadré par Pierre Dreneau.',
       ],

@@ -184,7 +184,7 @@ const sport = {
       title: 'Triathlon',
       lines: [
         'Embrun triathlon, Olympic distance, in 2026.',
-        '5 km in 19:17, alone on the track.',
+        '5 km in 19:17 on the track.',
         'Half marathon in 1:36.',
         'Training supervised by Pierre Dreneau.',
       ],
