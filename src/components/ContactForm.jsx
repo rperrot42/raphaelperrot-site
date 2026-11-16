@@ -13,6 +13,12 @@ const T = {
     plusRapide: "Besoin d'une réponse plus rapide ? Appelez-moi au",
     erreur: "L'envoi a échoué. Appelez-moi au",
     ou: 'ou écrivez à',
+    champ: {
+      nom: 'Indiquez votre nom (120 caractères maximum).',
+      email: "Cette adresse e-mail n'est pas valide.",
+      message: 'Écrivez quelques mots de plus : cinq caractères au minimum.',
+    },
+    champAutre: 'Un champ est invalide.',
     legal: 'Vos coordonnées servent uniquement à vous répondre. Ni revendues, ni utilisées pour de la prospection.',
     enSavoirPlus: 'En savoir plus',
     legalLien: '/mentions-legales',
@@ -27,6 +33,12 @@ const T = {
     plusRapide: 'Need a faster answer? Call me on',
     erreur: 'Sending failed. Call me on',
     ou: 'or write to',
+    champ: {
+      nom: 'Please enter your name (120 characters maximum).',
+      email: 'This email address is not valid.',
+      message: 'Please write a few more words: five characters minimum.',
+    },
+    champAutre: 'A field is invalid.',
     legal: 'Your details are only used to reply to you. Never sold, never used for cold outreach.',
     enSavoirPlus: 'Learn more',
     legalLien: '/en/legal-notice',
@@ -35,6 +47,7 @@ const T = {
 
 export default function ContactForm({ idPrefix = 'c', onSent }) {
   const [status, setStatus] = useState('idle');
+  const [refuses, setRefuses] = useState([]);
   const lang = useLang();
   const t = T[lang];
   const id = (n) => `${idPrefix}-${n}`;
@@ -45,6 +58,7 @@ export default function ContactForm({ idPrefix = 'c', onSent }) {
     const data = new FormData(form);
     if (data.get('_gotcha')) return;
 
+    setRefuses([]);
     setStatus('sending');
     try {
       const res = await fetch(contact.formEndpoint, {
@@ -62,6 +76,16 @@ export default function ContactForm({ idPrefix = 'c', onSent }) {
       } catch {
         throw new Error('réponse illisible');
       }
+      // Un champ invalide (422) n'est PAS une panne d'envoi. Avant, les deux
+      // cas donnaient le même message — « L'envoi a échoué, appelez-moi » —
+      // alors qu'il suffisait d'allonger le message de trois mots. On disait
+      // à un prospect que le site était cassé.
+      if (res.status === 422 && Array.isArray(reponse?.champs) && reponse.champs.length) {
+        setRefuses(reponse.champs);
+        setStatus('invalide');
+        return;
+      }
+
       if (!res.ok || reponse?.ok !== true) throw new Error('refusé');
       form.reset();
       setStatus('sent');
@@ -92,11 +116,17 @@ export default function ContactForm({ idPrefix = 'c', onSent }) {
       <div className="form-row">
         <div className="field">
           <label htmlFor={id('name')}>{t.nom}</label>
-          <input id={id('name')} name="name" type="text" required autoComplete="name" />
+          <input
+            id={id('name')} name="name" type="text" required maxLength={120}
+            autoComplete="name" aria-invalid={refuses.includes('nom') || undefined}
+          />
         </div>
         <div className="field">
           <label htmlFor={id('email')}>{t.email}</label>
-          <input id={id('email')} name="email" type="email" required autoComplete="email" />
+          <input
+            id={id('email')} name="email" type="email" required
+            autoComplete="email" aria-invalid={refuses.includes('email') || undefined}
+          />
         </div>
       </div>
 
@@ -109,7 +139,14 @@ export default function ContactForm({ idPrefix = 'c', onSent }) {
 
       <div className="field">
         <label htmlFor={id('message')}>{t.message}</label>
-        <textarea id={id('message')} name="message" rows="6" required placeholder={t.exemple} />
+        {/* minLength/maxLength : le navigateur refuse lui-même, avec son
+            propre message, avant même d'appeler le serveur. L'aller-retour
+            qui finissait en « l'envoi a échoué » n'a plus lieu. */}
+        <textarea
+          id={id('message')} name="message" rows="6" required
+          minLength={5} maxLength={5000} placeholder={t.exemple}
+          aria-invalid={refuses.includes('message') || undefined}
+        />
       </div>
 
       <input type="text" name="_gotcha" tabIndex="-1" autoComplete="off" aria-hidden="true" className="gotcha" />
@@ -119,6 +156,7 @@ export default function ContactForm({ idPrefix = 'c', onSent }) {
       </button>
 
       <p className="form-status" role="status" aria-live="polite">
+        {status === 'invalide' && refuses.map((c) => t.champ[c] ?? t.champAutre).join(' ')}
         {status === 'error' && (
           <>
             {t.erreur} <a href={contact.phoneLink}>{contact.phone}</a> {t.ou}{' '}

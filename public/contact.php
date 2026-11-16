@@ -61,12 +61,33 @@ $email   = sansSautDeLigne((string)($_POST['email'] ?? ''));
 $tel     = sansSautDeLigne((string)($_POST['phone'] ?? ''));
 $message = trim((string)($_POST['message'] ?? ''));
 
+// Le minimum est volontairement bas : « Devis ? » fait 7 caractères, et une
+// demande courte reste une demande. Les robots sont arrêtés par le honeypot,
+// pas par la longueur du message. Il sert seulement à écarter un envoi
+// accidentel à un seul caractère.
+const MESSAGE_MIN = 5;
+const MESSAGE_MAX = 5000;
+const NOM_MAX     = 120;
+
 $erreurs = [];
-if ($nom === '' || mb_strlen($nom) > 120)            { $erreurs[] = 'nom'; }
-if ($email === '' || !filter_var($email, FILTER_VALIDATE_EMAIL)) { $erreurs[] = 'email'; }
-if (mb_strlen($message) < 10 || mb_strlen($message) > 5000)      { $erreurs[] = 'message'; }
+if ($nom === '' || mb_strlen($nom) > NOM_MAX)                     { $erreurs[] = 'nom'; }
+if ($email === '' || !filter_var($email, FILTER_VALIDATE_EMAIL))  { $erreurs[] = 'email'; }
+if (mb_strlen($message) < MESSAGE_MIN
+    || mb_strlen($message) > MESSAGE_MAX)                         { $erreurs[] = 'message'; }
+
+// 422 et la liste des champs fautifs : le formulaire s'en sert pour dire au
+// visiteur ce qu'il doit corriger. Sans ça, il ne distingue pas un champ
+// invalide d'une panne du serveur, et annonce à tort que l'envoi a échoué.
+//
+// Les libellés restent côté front-end : le serveur ne sait pas si le
+// visiteur lit la version française ou anglaise du site.
 if ($erreurs) {
-    repondre(422, ['ok' => false, 'erreur' => 'Champs invalides', 'champs' => $erreurs]);
+    repondre(422, [
+        'ok'      => false,
+        'erreur'  => 'Champs invalides',
+        'champs'  => $erreurs,
+        'limites' => ['message_min' => MESSAGE_MIN, 'message_max' => MESSAGE_MAX, 'nom_max' => NOM_MAX],
+    ]);
 }
 
 // 1) Enregistrement : c'est le filet de sécurité, il passe avant l'e-mail.
